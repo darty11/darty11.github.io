@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: ShipBuilder.html
+   -->
+   <meta charset="utf-8" />
+   <title>Ship Builder</title>
+   <link rel="stylesheet" href="style_sb.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+	
+		<nav></nav>
+        <div id="left_panel" class = "panel">
+            <div class ="max-height-container">
+                <table data-type="PRIMARY_WEAPON" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="ENGINE" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SHIELD" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="AUGMENTATION" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SECONDARY_WEAPON_STANDARD" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SECONDARY_WEAPON_UTILITY" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SECONDARY_WEAPON_MINE" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SECONDARY_WEAPON_PROXIMITY" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+                <table data-type="SECONDARY_WEAPON_LARGE" class = "table weapons-table">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="main_panel" class = "panel">
+            <h1 id="ship_name"></h1>
+            <div id = "weapons_section">
+                
+                <div id="primaries_container" class="container">
+                    <h2>Primary Weapon</h1>
+                    <div class="slot-container slot-container-small">
+                    </div>
+                </div>
+                
+                <div id="engine_container" class="container">
+                    <h2>Engine</h1>
+                    <div class="slot-container slot-container-small">
+                    </div>
+                </div>
+                <div id="secondary_container" class="container">
+                    <h2>Secondary Weapons</h1>
+                    <div class="slot-container">
+                    </div>
+                </div>
+            </div>
+            <div id = "augmentations-section">
+                
+                <div id="shield_container" class="container">
+                    <h2>Shield</h1>
+                    <div class="slot-container slot-container-small">
+                    </div>
+                </div>
+                <div id="augmentation_container" class="container">
+                    <h2>Augmentations</h1>
+                    <div class="slot-container slot-container-small">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="right_panel" class = "panel">
+            <div class ="max-height-container">
+                <table data-type="PRIMARY_WEAPON" class ="table stat-table">
+                    <tbody>
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dps">Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#fireRate">Fire Rate</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="fireRate">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#energy">Energy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#shots">Shots</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="maxSpeed">Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accuracy">Inaccuracy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="randomSlide">Slide</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#range">Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>         
+                            <tr>
+                                <th  data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#effectDps">Effect Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="impact">Impact</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ips">Impact Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#kps">Kick Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <th  data-key="lockingRange">Locking Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SECONDARY_WEAPON_STANDARD" class ="table stat-table">
+                    <tbody>
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dps">Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#fireRate">Fire Rate</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="fireRate">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#energy">Energy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ammo">Ammo</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#shots">Shots</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="maxSpeed">Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="acceleration">Acceleration</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="initSpeed">Starting Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ttts">Time Till Top Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="turning">Turning</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accuracy">Inaccuracy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%fireSide">Fire Side</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="randomSlide">Slide</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#turnR">Turning Radius</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#turns"><abbr title="Total number of complete turns weapon can complete in its lifetime.">Total Turns</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#minrangeturn"><abbr title="Minimum range weapon can be fired at to garuntee it will turn to face the target before it passes them.">Min Range (turning)</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="armingTime">Arming Time</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#range">Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#minrangearm"><abbr title="Minimum range weapon can be fired at to garuntee it arm before it hits the target">Min Range (arming)</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%guidance">Guidance</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="lockingRange">Locking Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>         
+                            <tr>
+                                <th  data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#effectDps">Effect Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="impact">Impact</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ips">Impact Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#kps">Kick Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="#stackCount"><abbr title="The number of copies of this weapon that can be stacked together before the 0.3 second switching penalty makes stacking more redundant.">Stack Size</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackedDps"><abbr title="Damage an individual weapon will do per second when fired as part of a stack.">Stacked DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackDps"><abbr title="Damage the largest possible stack of this weapon will output per second.">Total Stack DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SECONDARY_WEAPON_UTILITY" class ="table stat-table">
+                    <tbody>
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#fireRate">Fire Rate</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="fireRate">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#energy">Energy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ammo">Ammo</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>   
+                            <tr>
+                                <th  data-key="#epm">Effect Per Magazine</th>
+                                <td class="value"></td>
+                            </tr>
+                                        
+                            
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dps">Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="lockingRange">Locking Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="maxSpeed">Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="acceleration">Acceleration</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="initSpeed">Starting Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ttts">Time Till Top Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accuracy">Inaccuracy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="randomSlide">Slide</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#turnR">Turning Radius</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#turns"><abbr title="Total number of complete turns weapon can complete in its lifetime.">Total Turns</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#minrangeturn"><abbr title="Minimum range weapon can be fired at to garuntee it will turn to face the target before it passes the target.">Min Range (turning)</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="armingTime">Arming Time</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#minrangearm"><abbr title="Minimum range weapon can be fired at to garuntee it arm before it hits the target">Min Range (arming)</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#range">Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%guidance">Guidance</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+
+                            <tr>
+                                <th  data-key="impact">Impact</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ips">Impact Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#kps">Kick Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SECONDARY_WEAPON_MINE" class ="table stat-table">
+                    <tbody>
+
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dps">Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#fireRate">Fire Rate</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="fireRate">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#energy">Energy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ammo">Ammo</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#shots">Shots</th>
+                                <td class="value"></td>
+                            </tr>
+                          
+                            <tr>
+                                <th  data-key="randomSlide">Slide</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="armingTime">Arming Time</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%guidance">Guidance</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="lockingRange">Locking Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>         
+                            <tr>
+                                <th  data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#effectDps">Effect Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="impact">Impact</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ips">Impact Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#kps">Kick Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                             
+                            <tr>
+                                <th  data-key="#stackCount"><abbr title="The number of copies of this weapon that can be stacked together before the 0.3 second switching penalty makes stacking more redundant.">Stack Size</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackedDps"><abbr title="Damage an individual weapon will do per second when fired as part of a stack.">Stacked DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackDps"><abbr title="Damage the largest possible stack of this weapon will output per second.">Total Stack DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+           
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SECONDARY_WEAPON_PROXIMITY" class ="table stat-table">
+                    <tbody>
+
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dps">Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#fireRate">Fire Rate</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="fireRate">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#energy">Energy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ammo">Ammo</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#shots">Shots</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="maxSpeed">Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accuracy">Inaccuracy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#range">Range</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>         
+                            <tr>
+                                <th  data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#effectDps">Effect Damage Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="impact">Impact</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ips">Impact Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#kps">Kick Per Second</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="#stackCount"><abbr title="The number of copies of this weapon that can be stacked together before the 0.3 second switching penalty makes stacking more redundant.">Stack Size</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackedDps"><abbr title="Damage an individual weapon will do per second when fired as part of a stack.">Stacked DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#stackDps"><abbr title="Damage the largest possible stack of this weapon will output per second.">Total Stack DPS</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SECONDARY_WEAPON_LARGE" class ="table stat-table">
+                    <tbody>
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="damage">Damage Per Hit</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%damageType">Damage Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#ammo">Ammo</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#shots">Shots</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="maxSpeed">Speed</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accuracy">Inaccuracy</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="life">Lifetime</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#range">Range</th>
+                                <td class="value"></td>
+                            </tr>            
+                            
+                            <tr>
+                                <th  data-key="#effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="effectTime">Effect Time</th>
+                                <td class="value"></td>
+                            </tr>         
+                            <tr>
+                                <th  data-key="kickback">Kick</th>
+                                <td class="value"></td>
+                            </tr>
+                                                
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="ENGINE" class ="table stat-table">
+                    <tbody>
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="maxSpeedMod">Speed Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="accelMod">Acceleration Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="turningMod">Turning Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="propulsionEnhance">Boost Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#topBoost"><abbr title="Speed multiplier right after boost is pressed.">Top Boost Speed</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#averageBoost"><abbr title="Average speed multiplier if boost is held down continuously.">Average Boost Speed</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="propulsionEnhanceTime">Boost Length</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="#boostCost"><abbr title="Energy cost per second to hold down boost.">Continual Boost Cost</abbr></th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="autoPilotSpeedInc">Autopilot Speed Bonus</th>
+                                <td class="value"></td>
+                            </tr>   
+                            <tr>
+                                <th  data-key="reverseSpeedMod">Reverse Multiplier</th>
+                                <td class="value"></td>
+                            </tr>   
+                            <tr>
+                                <th  data-key="#reverseSpeed"><abbr title="Reverse multiplier multiplied by speed multiplier to get actual revese speed multiplier.">Reverse Speed Multiplier</abbr></th>
+                                <td class="value"></td>
+                            </tr>   
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="SHIELD" class ="table stat-table">
+                    <tbody>
+
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="maxModifier">Shield Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="chargeModifier">Charge Multiplier</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="chargeDelay">Charge Delay</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%effect">Effect</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="effectAmount">Effect Amount</th>
+                                <td class="value"></td>
+                            </tr>
+                                               
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+                <table data-type="AUGMENTATION" class ="table stat-table">
+                    <tbody>
+
+                            <tr>
+                                <th  data-key="name">Name</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="energyUsage">Energy Use</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="effectTime">Reload</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="%augType">Type</th>
+                                <td class="value"></td>
+                            </tr>
+                            <tr>
+                                <th  data-key="level">level</th>
+                                <td class="value"></td>
+                            </tr>
+                            
+                            <tr>
+                                <th  data-key="buyable">Buyable</th>
+                                <td class="value"></td>
+                            </tr>                    
+                            <tr>
+                                <th  data-key="#race">Race</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#skill">Skill</th>
+                                <td class="value"></td>
+                            </tr>                 
+                            <tr>
+                                <th  data-key="#level">Skill Level</th>
+                                <td class="value"></td>
+                            </tr>              
+                            <tr>
+                                <th  data-key="passive">Passive</th>
+                                <td class="value"></td>
+                            </tr>          
+                            <tr>
+                                <th  data-key="#description">Description</th>
+                                <td class="value"></td>
+                            </tr>
+                        
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div id="bottom_panel" class = "panel">
+            <div class = "display-group">
+                <h3>Shields</h3>
+                <abbr class ="header" title="Total Shields">SHD</abbr><span class ="value" data-type=totalShield></span>
+                <abbr class ="header" title="Shield Regen">RGN</abbr><span class ="value" data-type=regenShield></span>
+                <abbr class ="header" title="Potential shields lost each time regeneration is interrupted">IRL</abbr><span class ="value" data-type=interuptLossShield></span>
+                <abbr class ="header" title="Shield Radius">RDS</abbr><span class ="value" data-type=radiusShield></span>
+                <abbr class ="header" title="Effective shields against the damage type the shield is strong against">ESS</abbr><span class ="value" data-type=effectiveStrongShield></span>
+                <abbr class ="header" title="Effective shields against the damage type the shield is weak against">ESW</abbr><span class ="value" data-type=effectiveWeakShield></span>
+            </div>
+            <div class = "display-group display-group-big">
+                <h3>Engines</h3>
+                <abbr class ="header" title="Max Crusing Speed">CSP</abbr><span class ="value" data-type=cruiseSpeed></span>
+                <abbr class ="header" title="Turning">TRN</abbr><span class ="value" data-type=turnSpeed></span>
+                <abbr class ="header" title="Speed ship travels at after boost is pressed">TBS</abbr><span class ="value" data-type=boostSpeed></span>
+                <abbr class ="header" title="Average speed when continuously boosting">ABS</abbr><span class ="value" data-type=boostAverageSpeed></span>
+                <abbr class ="header" title="Duration of a boost">BDR</abbr><span class ="value" data-type=boostTimeSpeed></span>
+                <abbr class ="header" title="Energy cost per second to boost non-stop">CBC</abbr><span class ="value" data-type=boostEnergySpeed></span>
+                <!-- Second column-->
+                <abbr class ="header" title="Reverse Speed">RSP</abbr><span class ="value" data-type=reverseSpeed></span>
+                <abbr class ="header" title="Acceleration">ACC</abbr><span class ="value" data-type=accelSpeed></span>
+                <abbr class ="header" title="Time till ship reaches top cruising speed">TTS</abbr><span class ="value" data-type=cruiseTimeSpeed></span>
+                <abbr class ="header" title="Autopilot Speed">APS</abbr><span class ="value" data-type=autopilotSpeed></span>
+                
+            </div>
+            <div class = "display-group">
+                <h3>Energy</h3>
+                <abbr class ="header" title="Energy Capacity">CAP</abbr><span class ="value" data-type=totalEnergy></span>
+                <abbr class ="header" title="Energy regen excluding effects">RGN</abbr><span class ="value" data-type=regenEnergy></span>
+                <abbr class ="header" title="Energy regen just from effects">RGE</abbr><span class ="value" data-type=effectRegenEnergy></span>
+                <abbr class ="header" title="Energy regen from all sources">RGA</abbr><span class ="value" data-type=allRegenEnergy></span>
+                <abbr class ="header" title="Solar charging of the sector">CRG</abbr><input class ="value" type = "number" id = "solar_charging" min="0.6" value = "2.5" step = "0.1"></input>
+            </div>
+            
+            <div class = "display-group">
+                <h3>Primary</h3>
+                <abbr class ="header" title="Damage per second">DPS</abbr><span class ="value" data-type=dpsPrimary></span>
+                <abbr class ="header" title="Energy usage per second">ERG</abbr><span class ="value" data-type=energyPrimary></span>
+                <abbr class ="header" title="Energy regen from passive charging while weapon is firing">FRG</abbr><span class ="value" data-type=firingRegenPrimary></span>
+                <abbr class ="header" title="Net energy gain/loss from passive charging and energy usage while weapon is firing">NRG</abbr><span class ="value" data-type=netRegenPrimary></span>
+                <abbr class ="header" title="Time it takes for the weapon to drain your capacitor, or the time it takes to refill an empty capacitor while firing">TTD</abbr><span class ="value" data-type=drainTimePrimary></span>
+                <abbr class ="header" title="Time it takes for the weapon to drain your capacitor, or the time it takes to refill an empty capacitor while firing, including effect regen">TDE</abbr><span class ="value" data-type=drainTimeEffectPrimary></span>
+            </div>
+            
+            <div class = "display-group ">
+                <h3>Energy Standards</h3>
+                <abbr class ="header" title="Damage per second">DPS</abbr><span class ="value" data-type=dpsEnergySecondary></span>
+                <abbr class ="header" title="Energy usage per second">ERG</abbr><span class ="value" data-type=energySecondary></span>
+                <abbr class ="header" title="Energy regen from passive charging while weapons are firing. Assumes weapons are all fired in 0.3 second intervals followed by a cooldown period">FRG</abbr><span class ="value" data-type=firingRegenSecondary></span>
+                <abbr class ="header" title="Net energy gain/loss from passive charging and energy usage while weapons are firing">NRG</abbr><span class ="value" data-type=netRegenSecondary></span>
+                <abbr class ="header" title="Time it takes for the weapons to drain your capacitor, or the time it takes to refill an empty capacitor while firing">TTD</abbr><span class ="value" data-type=drainTimeSecondary></span>
+                <abbr class ="header" title="Time it takes for the weapons to drain your capacitor, or the time it takes to refill an empty capacitor while firing, including effect regen">TDE</abbr><span class ="value" data-type=drainTimeEffectSecondary></span>
+            </div>
+            
+            <div class = "display-group ">
+                <h3>Ammo Standards</h3>
+                <abbr class ="header" title="Damage per second">DPS</abbr><span class ="value" data-type=dpsAmmoSecondary></span>
+                <abbr class ="header" title="Time it takes to drain the smallest magazine of its ammo if weapons are all fired in full volleys">MDT</abbr><span class ="value" data-type=ammoTimeSecondary></span>
+                <abbr class ="header" title="Downtime required to reload a magazine, not including the downtime that would be required by the cooldown of the slowest firing weapon">DWT</abbr><span class ="value" data-type=downtimeSecondary></span>
+                <abbr class ="header" title="Sustained damage per second, including the time it takes to reload a magazine.">SDS</abbr><span class ="value" data-type=sustainedDpsSecondary></span>
+                <abbr class ="header" title="Total damage potential of all weapons on the ship">TDM</abbr><span class ="value" data-type=totalDamageSecondary></span>
+            </div>
+            
+            <div class = "display-group display-group-giant">
+                <h3>Damage Types</h3>
+                <abbr class ="header" title="Projectile damage">PRJ</abbr><span class ="value" data-type="%Projectile"></span>
+                <abbr class ="header" title="Explosive damage">EXP</abbr><span class ="value" data-type="%Explosive"></span>
+                <abbr class ="header" title="Laser damage">LSR</abbr><span class ="value" data-type="%Laser"></span>
+                <abbr class ="header" title="Heat damage">HET</abbr><span class ="value" data-type="%Heat"></span>
+                <abbr class ="header" title="Energy extaction">EGE</abbr><span class ="value" data-type="%EnergyExtaction"></span>
+                <abbr class ="header" title="Repair">REP</abbr><span class ="value" data-type="%Repair"></span>
+                <!-- Second column-->
+                <abbr class ="header" title="Electrostatic damage">ELS</abbr><span class ="value" data-type="%Electrostatic"></span>
+                <abbr class ="header" title="Tractor damage">TRC</abbr><span class ="value" data-type="%Tractor"></span>
+                <abbr class ="header" title="Photonic damage">PHO</abbr><span class ="value" data-type="%Photonic"></span>
+                <abbr class ="header" title="Shield Extraction">SDE</abbr><span class ="value" data-type="%ShieldExtraction"></span>
+                <abbr class ="header" title="Ammo Harvesting">AMH</abbr><span class ="value" data-type="%AmmoHarvest"></span>
+                <abbr class ="header" title="Shield Harvesting">SDH</abbr><span class ="value" data-type="%ShieldHarvest"></span>
+                <!-- Third column-->
+                <abbr class ="header" title="Energy Harvesting">EGH</abbr><span class ="value" data-type="%EnergyHarvest"></span>
+                <abbr class ="header" title="Ghostly damage">GHT</abbr><span class ="value" data-type="%Ghostly"></span>
+                <abbr class ="header" title="Effect damage">EFF</abbr><span class ="value" data-type="effectDamage"></span>
+            </div>
+            <div class = "display-group">
+                <h3>Damage Sources</h3>
+                <abbr class ="header" title="Dumbfire">DMB</abbr><span class ="value" data-type="#Dumbfire"></span>
+                <abbr class ="header" title="Guided">GUD</abbr><span class ="value" data-type="#Guided"></span>
+                <abbr class ="header" title="Thunder">TDR</abbr><span class ="value" data-type="#Thunder"></span>
+                <abbr class ="header" title="Beam">BEM</abbr><span class ="value" data-type="#Beam"></span>
+                <abbr class ="header" title="Proximity">PRX</abbr><span class ="value" data-type="#Proximity"></span>
+            </div>
+            
+            <div class = "display-group">
+                <h3>Miscellaneous</h3>
+                <abbr class ="header" title="Energy and ammo standard weapon dps">SDS</abbr><span class ="value" data-type="totalStandardDps"></span>
+                <abbr class ="header" title="Hyperspace reload time">HPS</abbr><span class ="value" data-type="hyperspaceTime"></span>
+                <abbr class ="header" title="Time it takes to reload a magazine">RLD</abbr><span class ="value" data-type="reload"></span>
+                <abbr class ="header" title="Ship name">NAM</abbr><input class ="value"  id = "ship_custom_name"></input>
+                <button onClick = "saveToStorage();">Save</button>
+            </div>
+        </div>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupShipBuilder.js"></script>
+        
+    </body>
+
+</html>

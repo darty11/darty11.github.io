@@ -1,0 +1,64 @@
+
+
+
+
+
+
+.table th.sorter:nth-child(3):hover{
+
+  z-index: 12;
+}
+
+
+.table td:nth-child(1),.table th:nth-child(1){
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  left:1px;
+
+  padding: 0;
+  background-clip: padding-box;
+}
+.table td:nth-child(1) *{
+  width: 21px;
+  height: 21px;
+  margin: 0;
+}
+.table td:nth-child(2),.table th:nth-child(2){
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  left:23px;
+  
+  padding: 0;
+  background-clip: padding-box;
+}
+.table td:nth-child(3),.table th:nth-child(3){
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  left:54px;
+  
+  background-clip: padding-box;
+}
+//Set the z indexs of the rows and header so that the header is always on top.{}
+.table td:nth-child(1),.table td:nth-child(2),.table td:nth-child(3){
+  z-index:0;
+}
+
+.table th:nth-child(1),.table th:nth-child(2),.table th:nth-child(3){
+  z-index:10;
+}
+
+// Some css shenanigans to make the border between cells actually show up.{}
+.table td:nth-child(1):after,.table td:nth-child(2):after,.table td:nth-child(3):after{
+    content:'';
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    outline:  1px solid #003d5a;
+    z-index: -1;
+    background-color:black;
+}
+
+
+

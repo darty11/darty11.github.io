@@ -1,0 +1,164 @@
+html{
+  font-family: Arial,Helvetica Neue,Helvetica,sans-serif; 
+}
+header, nav{
+  display:flex;
+  align-items:stretch;
+  border-top: 2px solid #003d5a;
+ 
+  border-bottom: 2px solid #003d5a;
+  width: 100%;
+}
+header>*,nav>* {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border-left: 1px solid #003d5a;
+  padding: 0.5em;
+  text-align: center;
+}
+header>*:last-child,nav>*:last-child {
+  
+  border-right: 1px solid #003d5a;
+}
+header>*:first-child {
+  
+  border-left: 2px solid #003d5a;
+  border-right: 1px solid #003d5a;
+}
+header .checkbox input{
+  margin: 2px 3px 2px 3px;
+  height: 100%;
+}
+html{
+  padding: 0px;
+  display: ;
+  width: 100%;
+}
+body{
+  margin: 0px;
+  
+  color:white;
+  background-color:black;
+  /*! display: block; */
+  width: auto;
+}
+.scroll-cell{
+    line-height:1.2em;
+    max-height: 2.4em;
+    width: 100ch;
+    overflow: auto;
+    
+    text-align:left;
+}
+button, a{
+ 
+  color:white;
+  background-color:black;
+  border: 1px solid #003d5a;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  text-decoration:none;
+  padding:0px 8px;
+}
+button:disabled ,a[disabled]{
+ 
+  color:white;
+  background-color:black;
+  border: 1px solid #001b29;
+  cursor: default;
+  pointer-events: none;
+}
+button:disabled:hover, a:disabled:hover{
+ 
+  border: 1px solid #001b29;
+}
+button:hover, a:hover{
+  border: 1px solid #008cc4;
+}
+.table td{
+  text-align:center;
+  padding:0.25em 0.5em;
+}
+.table,.table th,.table td {
+  border: 1px solid #003d5a;
+}
+.table {
+  border-collapse:collapse;
+}
+//Stick the table header and first two rows to the top and left side of the parent container so that it is always visible while scrolling {}
+.table thead th{
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background-clip: padding-box;
+  padding:0.25em 0.5em;
+  z-index:0;
+}
+// Some css shenanigans to make the border between cells actually show up.{}
+.table th:after{
+    content:'';
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    outline:  1px solid #003d5a;
+    z-index: -1;
+    background-color:black;
+}
+.races-container, .skills-container{
+  flex-direction:column;
+  flex-wrap: wrap;
+  
+  display: inline-grid;
+  margin: 0;
+}
+.races-container>*,.skills-container>*{
+    
+  display: flex;
+  align-content: center;
+  align-items:center;
+  flex-direction: row;
+  margin:0px 5px;
+}
+.skills-container>*{
+    
+  display: flex;
+  align-content: center;
+  align-items:center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.skills-container input{
+  width:5em;
+  
+}
+
+
+.races-container *:nth-child(2n),.skills-container *:nth-child(2n){
+  grid-row: 2;
+}
+
+.races-container *:nth-child(2n+1),.skills-container *:nth-child(2n+1){
+  grid-row: 1;
+}
+.table th.sorter{
+  cursor: pointer;
+}
+.table th.sorter:hover::before{
+  content:"";
+  width:100%;
+  height: 100%;
+  position:absolute;
+  left:0;
+  top:0px;
+  outline: 1px solid #008cc4;
+}
+.table th.sorter:hover{
+
+  z-index: 9;
+}

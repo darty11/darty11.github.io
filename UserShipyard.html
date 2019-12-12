@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: UserShipyard.html
+   -->
+   <meta charset="utf-8" />
+   <title>User Shipyard</title>
+   <link rel="stylesheet" href="style_sy.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+		<nav></nav>
+        <header>
+            <div>
+                Filters:
+            </div>
+            <div>
+                <button onclick="resetConfig();">Reset</button>
+            </div>
+            <label for="need_buyable">
+                <div>
+                    <input id="need_buyable"  type="checkbox" checked></input> Filter Buyable
+                </div>
+            </label>
+            <label for="max_level">Max Unlock Level:</label>
+            <div>
+                <input id="max_level" type="number" min="0" max="120" value = 120></input>
+            </div>
+            <div>
+                Races:
+            </div>
+            <div class="races-container">
+                <!--Populated with buttons by code-->
+            </div>
+        </header>
+        <table id = "main" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="customName">Name</th>
+                    <th class=sorter data-key="name">Ship Type</th>
+                    <th class=sorter data-key=".totalShield">Shields</th>
+                    <th class=sorter data-key=".regenShield">Shield Regen</th>
+                    <th class=sorter data-key=".cruiseSpeed">Speed</th>
+                    <th class=sorter data-key=".boostAverageSpeed">Average Boost Speed</th>
+                    <th class=sorter data-key=".turnSpeed">Turning</th>
+                    <th class=sorter data-key=".accelSpeed">Acceleration</th>
+                    <th class=sorter data-key=".lockingAngle">Locking Angle</th>
+                    <th class=sorter data-key="mass">Mass</th>
+                    <th class=sorter data-key="cargoAmount">Cargo</th>
+                    <th class=sorter data-key="shieldSize">Shield Radius</th>
+                    <th class=sorter data-key="unlockLevel">Level</th>
+                    <th class=sorter data-key="race">Race</th>
+                    <th class=sorter data-key="buyable">Buyable</th>
+                    <th data-key="#delete"></th>
+                    <th data-key="description" data-scroll="1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupShipyard.js"></script>
+        <script src="setupUserShipyard.js"></script>
+        
+    </body>
+
+</html>

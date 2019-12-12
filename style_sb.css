@@ -1,0 +1,315 @@
+nav{
+  
+  grid-column-start: 1;
+  grid-column-end: end;
+}
+.display-group input{
+  width:4.5em;
+}
+.display-group button{
+  grid-column-start: 1;
+  grid-column-end :end;
+}
+#ship_custom_name{
+  width:auto;
+}
+.header {
+  font-family: "Courier New", Courier, monospace
+}
+.header::after {
+  content:":";
+}
+h3{
+  margin:0;
+  grid-column-start: 1;
+  grid-column-end: end;
+}
+.display-group {
+  display:inline-grid;
+  grid-auto-flow: dense;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+  grid-template-columns: auto auto [end];
+}
+.display-group-big {
+  grid-template-columns: auto auto 10px auto auto[end];
+}
+.display-group .value{
+  grid-column-start: 2;
+}
+.display-group-big .header:nth-child(14) ~ .value, .display-group-giant .header:nth-child(14) ~ .value{
+  grid-column-start: 5;
+}
+.display-group-big .header:nth-child(12) ~ .header, .display-group-giant .header:nth-child(12) ~ .header{
+  grid-column-start: 4;
+}
+.display-group-big .header, .display-group-giant .header{
+  grid-column-start: 1;
+}
+
+.display-group-giant {
+  grid-template-columns: auto auto 10px auto auto 10px auto auto[end];
+}
+.display-group-giant .header:nth-child(26) ~ .value{
+  grid-column-start: 8;
+}
+.display-group-giant .header:nth-child(24) ~ .header{
+  grid-column-start: 7;
+}
+.display-group-big .header{
+  grid-column-start: 1;
+}
+
+#bottom_panel > *:first-child{
+  border-left:
+1px solid #003d5a;
+}
+table.passive tr[data-active=true]{
+  background-color:rgb(40,5,7);
+}
+
+
+.stat-table th::after{
+  display:none;
+}
+.weapons-table tr:hover td:not(:nth-child(1))::after,  .weapons-table td:hover::after{
+  border: 1px solid #008cc4;
+  position:absolute;
+  content:"";
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  z-index: 1;
+  transform: translate(-1px,-1px);
+}
+.weapons-table tr td:hover:nth-child(1) ~ td::after{
+  display:none;
+}
+.weapons-table tr:hover td{
+  position:relative;
+}
+.weapons-table .collapser .expand, .weapons-table .expander .collapse{
+  display:none;
+}
+.weapons-table td{
+  cursor: pointer;
+}
+.weapons-table td.disabled{
+  color:gray;
+  cursor: default;
+  pointer-events: none;
+}
+.weapons-table td.disabled::after{
+  display:none;
+}
+#main_panel, #left_panel{
+  
+   -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
+.table td:nth-child(2){
+ padding: 0;
+}
+.weapons-table, .stat-table{
+  width:100%;
+}
+.max-height-container{
+  position: absolute;
+  height: calc(100% - 20px);
+  width: calc(100% - 20px);
+  overflow-y: auto;
+}
+h2 {
+  font-size: 0.75em;
+  font-weight: normal;
+  color:#008cc4;
+  /*! margin: 0.625%; */
+}
+.slot{
+  display:inline-block;
+  margin: 2.5%;
+  /*! padding: 10%; */
+  /*! position: relative; */
+}
+.slot.empty img{
+  display:none;
+}
+
+.slot.empty p.slot-name{
+  display:block;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10pt;
+}
+.slot p.slot-name{
+  display:none;
+}
+.slot p.weapon-name{
+  display:block;
+  
+  margin: 0;
+  bottom: 0;
+  top: auto;
+  font-size: 8pt;
+  background-color: black;
+  width: 100%;
+  border-top: 1px solid #008cc4;
+  text-align: center;
+}
+.slot.selected p.weapon-name{
+
+  border-top: 1px solid #74D7FF;
+}
+.slot.empty p.weapon-name{
+  display:none;
+}
+.slot.selected:hover p.weapon-name,.slot:hover p.weapon-name{
+
+    border-top: 1px solid white;
+}
+.slot-container{
+  grid-row-start: 2;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display:grid;
+  
+}
+.square {
+
+    position: relative;
+    padding-top: 100%;
+    border: 1px solid #008cc4;
+    cursor: pointer;
+}
+.slot.selected .square {
+
+    border: 1px solid #74D7FF;
+}
+.square:hover, .slot.selected .square:hover {
+
+    border: 1px solid white;
+}
+.square>*{
+
+    position: absolute;
+    top:0;
+    left:0;
+
+}
+.slot-container-small{
+  grid-row-start: 2;
+  grid-template-columns: 1fr 1fr;
+  display:grid;
+  
+}
+#weapons_section {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+
+}
+#primaries_container, #engine_container {
+
+    display: grid;
+    
+    grid-template-rows: auto 1fr;
+}
+#secondary_container {
+  /*! display: grid; */
+   
+  grid-column-end: 3;
+  grid-column-start: 1;
+}
+#ship_name{
+  grid-column-start: 1;
+  grid-column-end:4;
+    
+}
+.slot img {
+  /*! font-size: 0.75em; */
+  /*! font-weight: normal; */
+  /*! display: inline-block; */
+  width:100%;
+  height: 100%;
+}
+html {
+    height: 100%;
+}
+h1 {
+  padding:0;
+  margin:0;
+  font-weight: normal;
+ text-align: center;
+}
+.wrapper-vertical, .wrapper{
+  display:inline-flex;
+}
+.wrapper{
+  flex-direction:column;
+  width: 100%;
+}
+.container{
+  flex-grow:1;
+}
+#main_panel {
+  min-width:560px;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  /*! width: calc(100% - 800px); */
+  display: grid;
+  grid-template-columns: 2fr 2.5% 1fr;
+  grid-template-rows: auto 1fr;
+}
+#left_panel {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  min-width: 300px;
+  position: relative;
+}
+#right_panel {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  min-width: 300px;
+  position: relative;
+}
+#bottom_panel {
+  
+  grid-column-start: 1;
+  grid-row-start: 3;
+  grid-column-end: 4;
+  padding: 0;
+  display:flex;
+  justify-content: flex-start;
+  /*! width: 100%; */
+  overflow-x: auto;
+  position: relative;
+}
+#bottom_panel>*{
+  padding:10px;
+  border-right: 1px solid #003d5a;
+}
+.panel{
+  padding: 10px;
+  border: 2px solid #003d5a;
+}
+body {
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 50px auto 200px;
+  height: 100%;
+  /*! overflow-x: hidden; */
+}
+#augmentations-section {
+
+    grid-column-start: 3;
+
+}

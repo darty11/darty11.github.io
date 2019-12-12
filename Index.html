@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: Shipyard.html
+   -->
+   <meta charset="utf-8" />
+   <title>Shipyard</title>
+   <link rel="stylesheet" href="style_sy.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+	
+		<nav></nav>
+        <header>
+            <div>
+                Filters:
+            </div>
+            <div>
+                <button onclick="resetConfig();">Reset</button>
+            </div>
+            <label for="need_buyable">
+                <div>
+                    <input id="need_buyable"  type="checkbox" checked></input> Filter Buyable
+                </div>
+            </label>
+            <label for="max_level">Max Unlock Level:</label>
+            <div>
+                <input id="max_level" type="number" min="0" max="120" value = 120></input>
+            </div>
+            <div>
+                Races:
+            </div>
+            <div class="races-container">
+                <!--Populated with buttons by code-->
+            </div>
+        </header>
+        <table id = "main" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="maxShield">Shields</th>
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="turning">Turning</th>
+                    <th class=sorter data-key="accel">Acceleration</th>
+                    <th class=sorter data-key="lockingAngle">Locking Angle</th>
+                    <th class=sorter data-key="mass">Mass</th>
+                    <th class=sorter data-key="cargoAmount">Cargo</th>
+                    <th class=sorter data-key="standardSecondary">Standards</th>
+                    <th class=sorter data-key="utilitySecondary">Utilities</th>
+                    <th class=sorter data-key="proximitySecondary">Proximities</th>
+                    <th class=sorter data-key="mineSecondary">Mines</th>
+                    <th class=sorter data-key="largeSecondary">Larges</th>
+                    <th class=sorter data-key="augmentations">Augmentations</th>
+                    <th class=sorter data-key="turretSlot">Turret</th>
+                    <th class=sorter data-key="shieldSize">Shield Radius</th>
+                    <th class=sorter data-key="unlockLevel">Level</th>
+                    <th class=sorter data-key="race">Race</th>
+                    <th class=sorter data-key="buyable">Buyable</th>
+                    <th class=sorter data-key="price" data-key-secondary="lifePrice">Price/Life</th>
+                    <th data-key="description" data-scroll="1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupShipyard.js"></script>
+        
+    </body>
+
+</html>

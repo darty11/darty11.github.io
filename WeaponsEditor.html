@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: WeaponsEditor.html
+   -->
+   <meta charset="utf-8" />
+   <title>Weapon Editor</title>
+   <link rel="stylesheet" href="style_w.css" />
+   <link rel="stylesheet" href="style_we.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+		<nav></nav>
+        <table id = "primary_weapon" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="#dps">Damage Per Second</th>
+                    <th class=sorter data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                    <th class=sorter data-key="#fireRate">Fire Rate</th>
+                    <th class=sorter data-key="fireRate">Reload</th>
+					
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#energy">Energy</th>
+                    <th class=sorter data-key="#shots">Shots</th>
+                    
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="accuracy">Inaccuracy</th>
+                    <th class=sorter data-key="randomSlide">Slide</th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="#range">Range</th>
+                    <th class=sorter data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                    
+                    
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>         
+                    <th class=sorter data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                    <th class=sorter data-key="#effectDps">Effect Damage Per Second</th>
+                    <th class=sorter data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                    <th class=sorter data-key="impact">Impact</th>
+                    <th class=sorter data-key="#ips">Impact Per Second</th>
+                    <th class=sorter data-key="kickback">Kick</th>
+                    <th class=sorter data-key="#kps">Kick Per Second</th>
+                    
+                    
+                    <th class=sorter data-key="lockingRange">Locking Range</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "secondary_weapon_standard" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="#dps">Damage Per Second</th>
+                    <th class=sorter data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                    <th class=sorter data-key="#fireRate">Fire Rate</th>
+                    <th class=sorter data-key="fireRate">Reload</th>
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#energy">Energy</th>
+                    <th class=sorter data-key="#ammo">Ammo</th>
+                    <th class=sorter data-key="#shots">Shots</th>
+                    
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="acceleration">Acceleration</th>
+                    <th class=sorter data-key="initSpeed">Starting Speed</th>
+                    <th class=sorter data-key="#ttts">Time Till Top Speed</th>
+                    <th class=sorter data-key="turning">Turning</th>
+                    <th class=sorter data-key="accuracy">Inaccuracy</th>
+                    <th class=sorter data-key="randomSlide">Slide</th>
+                    <th class=sorter data-key="#turnR">Turning Radius</th>
+                    <th class=sorter data-key="#turns"><abbr title="Total number of complete turns weapon can complete in its lifetime.">Total Turns</abbr></th>
+                    <th class=sorter data-key="#minrangeturn"><abbr title="Minimum range weapon can be fired at to garuntee it will turn to face the target before it passes them.">Min Range (turning)</abbr></th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="armingTime">Arming Time</th>
+                    <th class=sorter data-key="#range">Range</th>
+                    <th class=sorter data-key="#minrangearm"><abbr title="Minimum range weapon can be fired at to garuntee it arm before it hits the target">Min Range (arming)</abbr></th>
+                    <th class=sorter data-key="lockingRange">Locking Range</th>
+                    <th class=sorter data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                    
+                    
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>         
+                    <th class=sorter data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                    <th class=sorter data-key="#effectDps">Effect Damage Per Second</th>
+                    <th class=sorter data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                    <th class=sorter data-key="impact">Impact</th>
+                    <th class=sorter data-key="#ips">Impact Per Second</th>
+                    <th class=sorter data-key="kickback">Kick</th>
+                    <th class=sorter data-key="#kps">Kick Per Second</th>
+                    
+                    <th class=sorter data-key="#stackCount"><abbr title="The number of copies of this weapon that can be stacked together before the 0.3 second switching penalty makes stacking more redundant.">Stack Size</abbr></th>
+                    <th class=sorter data-key="#stackedDps"><abbr title="Damage an individual weapon will do per second when fired as part of a stack.">Stacked DPS</abbr></th>
+                    <th class=sorter data-key="#stackDps"><abbr title="Damage the largest possible stack of this weapon will output per second.">Total Stack DPS</abbr></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "secondary_weapon_utility" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="#fireRate">Fire Rate</th>
+                    <th class=sorter data-key="fireRate">Reload</th>
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#energy">Energy</th>
+                    <th class=sorter data-key="#ammo">Ammo</th>
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>   
+                    <th class=sorter data-key="#epm">Effect Per Magazine</th>
+                                
+                    
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="#dps">Damage Per Second</th>
+                    <th class=sorter data-key="lockingRange">Locking Range</th>
+                    
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="acceleration">Acceleration</th>
+                    <th class=sorter data-key="initSpeed">Starting Speed</th>
+                    <th class=sorter data-key="#ttts">Time Till Top Speed</th>
+                    <th class=sorter data-key="accuracy">Inaccuracy</th>
+                    <th class=sorter data-key="randomSlide">Slide</th>
+                    <th class=sorter data-key="#turnR">Turning Radius</th>
+                    <th class=sorter data-key="#turns"><abbr title="Total number of complete turns weapon can complete in its lifetime.">Total Turns</abbr></th>
+                    <th class=sorter data-key="#minrangeturn"><abbr title="Minimum range weapon can be fired at to garuntee it will turn to face the target before it passes the target.">Min Range (turning)</abbr></th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="armingTime">Arming Time</th>
+                    <th class=sorter data-key="#minrangearm"><abbr title="Minimum range weapon can be fired at to garuntee it arm before it hits the target">Min Range (arming)</abbr></th>
+                    <th class=sorter data-key="#range">Range</th>
+                    <th class=sorter data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+
+                    <th class=sorter data-key="impact">Impact</th>
+                    <th class=sorter data-key="#ips">Impact Per Second</th>
+                    <th class=sorter data-key="kickback">Kick</th>
+                    <th class=sorter data-key="#kps">Kick Per Second</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "secondary_weapon_mine" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="#dps">Damage Per Second</th>
+                    <th class=sorter data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                    <th class=sorter data-key="#fireRate">Fire Rate</th>
+                    <th class=sorter data-key="fireRate">Reload</th>
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#energy">Energy</th>
+                    <th class=sorter data-key="#ammo">Ammo</th>
+                    <th class=sorter data-key="#shots">Shots</th>
+                  
+                    <th class=sorter data-key="randomSlide">Slide</th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="armingTime">Arming Time</th>
+                    <th class=sorter data-key="lockingRange">Locking Range</th>
+                    <th class=sorter data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>         
+                    <th class=sorter data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                    <th class=sorter data-key="#effectDps">Effect Damage Per Second</th>
+                    <th class=sorter data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                    <th class=sorter data-key="impact">Impact</th>
+                    <th class=sorter data-key="#ips">Impact Per Second</th>
+                    <th class=sorter data-key="kickback">Kick</th>
+                    <th class=sorter data-key="#kps">Kick Per Second</th>
+                       
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "secondary_weapon_proximity" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="#dps">Damage Per Second</th>
+                    <th class=sorter data-key="#dpshot" ><abbr title="Damage released by the weapon per trigger pull, including effect damage and multiple shots.">Damage Per Shot</abbr></th>
+                    <th class=sorter data-key="#fireRate">Fire Rate</th>
+                    <th class=sorter data-key="fireRate">Reload</th>
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#energy">Energy</th>
+                    <th class=sorter data-key="#ammo">Ammo</th>
+                    <th class=sorter data-key="#shots">Shots</th>
+                    
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="accuracy">Inaccuracy</th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="#range">Range</th>
+                    <th class=sorter data-key="#dpm"><abbr title="Total damage output from a full energy load or ammo magazine.">Damage Per Magazine</abbr></th>
+                    
+                    
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>         
+                    <th class=sorter data-key="#effectDamage"><abbr title="Damage done via effect per hit.">Effect Damage</abbr></th>
+                    <th class=sorter data-key="#effectDps">Effect Damage Per Second</th>
+                    <th class=sorter data-key="#tdps"><abbr title="Damage done via effect and collision per second.">Total Damage Per Second</abbr></th>
+                    <th class=sorter data-key="impact">Impact</th>
+                    <th class=sorter data-key="#ips">Impact Per Second</th>
+                    <th class=sorter data-key="kickback">Kick</th>
+                    <th class=sorter data-key="#kps">Kick Per Second</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "secondary_weapon_large" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="damage">Damage Per Hit</th>
+                    <th class=sorter data-key="ammoOrEnergyUsage">Ammo/energy</th>
+                    <th class=sorter data-key="#ammo">Ammo</th>
+                    <th class=sorter data-key="#shots">Shots</th>
+                    
+                    <th class=sorter data-key="maxSpeed">Speed</th>
+                    <th class=sorter data-key="accuracy">Inaccuracy</th>
+                    <th class=sorter data-key="life">Lifetime</th>
+                    <th class=sorter data-key="#range">Range</th>            
+                    
+                    <th class=sorter data-key="#effect">Effect</th>                    
+                    <th class=sorter data-key="effectTime">Effect Time</th>         
+                    <th class=sorter data-key="kickback">Kick</th>
+                                        
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "engine" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="maxSpeedMod">Speed Multiplier</th>
+                    <th class=sorter data-key="accelMod">Acceleration Multiplier</th>
+                    <th class=sorter data-key="turningMod">Turning Multiplier</th>
+                    <th class=sorter data-key="propulsionEnhance">Boost Multiplier</th>
+                    <th class=sorter data-key="#topBoost"><abbr title="Speed multiplier right after boost is pressed.">Top Boost Speed</abbr></th>
+                    <th class=sorter data-key="#averageBoost"><abbr title="Average speed multiplier if boost is held down continuously.">Average Boost Speed</abbr></th>
+                    <th class=sorter data-key="propulsionEnhanceTime">Boost Length</th>
+                    <th class=sorter data-key="#boostCost"><abbr title="Energy cost per second to hold down boost.">Continual Boost Cost</abbr></th>
+                    <th class=sorter data-key="autoPilotSpeedInc">Autopilot Speed Bonus</th>   
+                    <th class=sorter data-key="reverseSpeedMod">Reverse Multiplier</th>   
+                    <th class=sorter data-key="#reverseSpeed"><abbr title="Reverse multiplier multiplied by speed multiplier to get actual revese speed multiplier.">Reverse Speed Multiplier</abbr></th>   
+                    
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "shield" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="maxModifier">Shield Multiplier</th>
+                    <th class=sorter data-key="chargeModifier">Charge Multiplier</th>
+                    <th class=sorter data-key="chargeDelay">Charge Delay</th>
+                    <th class=sorter data-key="effectAmount">Effect Amount</th>
+                                       
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "augmentation" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="energyUsage">Energy Use</th>
+                    <th class=sorter data-key="effectTime">Reload</th>
+                                       
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <table id = "all" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#selector"></th>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="buyable">Buyable</th>                    
+                    <th class=sorter data-key="#race">Race</th>                 
+                    <th class=sorter data-key="#skill">Skill</th>                 
+                    <th class=sorter data-key="#level">Skill Level</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupWeaponEditor.js"></script>
+        
+    </body>
+
+</html>

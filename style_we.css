@@ -1,0 +1,29 @@
+.changed{
+  color:cyan;
+}
+.changed>input{
+  color:aquamarine;
+}
+.table td:nth-child(3) {
+  position: unset !important;
+  left: unset;
+}
+.table td:nth-child(3)::after {
+  content:unset;
+}
+.table th:nth-child(3){
+  left:unset !important;;
+  z-index: 9 !important;
+}
+.table td:nth-child(2){
+  padding:0.25em 0.5em !important;;
+}
+.table td:nth-child(2) input{
+  width: unset;
+}
+input{
+  width:5em;
+  color:white;
+  background-color: black;
+  border: 1px solid #003d5a;
+}

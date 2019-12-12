@@ -1,0 +1,47 @@
+.children, #HumanShips, #AralienShips{
+    display: flex;
+    width: 100%;
+    /*! justify-content: space-between; */
+    /*! position: absolute; */
+}
+#HumanShips, #AralienShips{
+    display: flex;
+    width: 100%;
+    /*! justify-content: space-between; */
+    /*! position: absolute; */
+    
+}
+.tree-node{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    /*! position: relative; */
+    /*! top: 0; */
+}
+.image-container{
+    border: white solid 1px;
+    margin: 10px;
+    background-color:black;
+    cursor: pointer;
+}
+.line-container{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+.line-container path{
+    stroke:white;
+    stroke-width: 2px;
+    fill: transparent;
+}
+body{
+    position:relative;
+    
+}
+img {
+    font-size:0.5em;
+}

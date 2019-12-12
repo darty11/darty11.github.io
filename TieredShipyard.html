@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: TierdShipyard.html
+   -->
+   <meta charset="utf-8" />
+   <title>Ships Tree</title>
+   <link rel="stylesheet" href="style_c.css" />
+   <link rel="stylesheet" href="style_TS.css" />
+</head>
+    <body>
+		<nav></nav>
+        <header>
+            <div>
+                Race:
+            </div>
+            <div>
+                <button id="human_button" onclick="enable_human();">Human Ships</button>
+            </div>
+            <div>
+                <button id="aralien_button" onclick="enable_aralien();">Aralien Ships</button>
+            </div>
+        </header>
+        <div class="ships-container">
+            <div id=HumanShips class="shipTree">
+            </div>
+            <div id=AralienShips class="shipTree">
+            </div>
+            
+            <svg class="line-container"></svg>
+            
+        </div>
+        <template id = "tree-node">
+            <div class="tree-node">
+                <div class ="image-container">
+                    <img width="80" height="80" src=""></img>
+                </div>
+                <div class = "children">
+                </div>
+            </div>
+        </template>
+        <template id = "tree-node-big">
+            <div class="tree-node">
+                <div class ="image-container">
+                    <img src=""></img>
+                </div>
+                <div class = "children">
+                </div>
+            </div>
+        </template>   
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupShipTrees.js"></script>
+        
+    </body>
+
+</html>
