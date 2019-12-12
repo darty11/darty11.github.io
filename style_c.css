@@ -33,12 +33,12 @@ header .checkbox input{
 }
 html{
   padding: 0px;
-  display: ;
   width: 100%;
 }
 body{
   margin: 0px;
   
+  display: table;
   color:white;
   background-color:black;
   /*! display: block; */

@@ -302,7 +302,7 @@ h1 {
   border: 2px solid #003d5a;
 }
 body {
-  display:grid;
+  display:grid !important;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: 50px auto 200px;
   height: 100%;
