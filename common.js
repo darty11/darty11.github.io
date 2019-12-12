@@ -979,7 +979,7 @@ function setupNav(){
 		var url = location.pathname;
 		url = url.substring(0, url.lastIndexOf("/"));
 		url +="/"+page[0];
-		var anchor = $('<a href="/'+url+'">'+page[1]+"</a>");
+		var anchor = $('<a href="'+url+'">'+page[1]+"</a>");
 		if(location.href.includes("/"+page[0])){
 			anchor.attr("disabled", true);
 		}
