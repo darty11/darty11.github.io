@@ -274,6 +274,7 @@ function calcExtension(wep, name){
 					val = val.replace(/\[amount\]/g,wep.amount);
 					val = val.replace(/\[effectTime\]/g,wep.effectTime);
 					val = val.replace(/\[levelPlusTwo\]/g,wep.level + 2);
+					val = val.replace(/\[effect\]/g,calcExtension(wep,"#effect"));
 					if(wep.subWeapon){
 						val = val.replace(/\[subWeapon\]/g, wep.subWeapon.name);
 						val = val.replace(/\[subWeaponLockingRange\]/g,wep.subWeapon.lockingRange);
