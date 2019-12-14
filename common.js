@@ -164,6 +164,12 @@ function calcExtension(wep, name){
             if(wep.name.includes("Broadside")){
                 val *= 4;
             }
+			if(wep.name.includes("Radial")){
+                val *= 8;
+				if(wep.name.includes("Plus")){
+					val*=2;
+				}
+            }
             if(getDamageSource(wep) == "Thunder"){
                 val *= wep.life;
             }
