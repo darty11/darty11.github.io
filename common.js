@@ -575,11 +575,8 @@ function getShipStat(ship, loadout, weaponData, stat){
             var APS = getAugmentationEffectTime(loadout.AUGMENTATION, weaponData, "AndromedanPowerSource");
             var DEC = getAugmentationLevel(loadout.AUGMENTATION, weaponData, "DarkEnergyCharging");
             var SPU = getAugmentationLevel(loadout.AUGMENTATION, weaponData, "SolarPanelUpgrade");
-            if(APS){
-                val = APS;
-            }
-            else if(DEC){
-                val = 1 / solarCharging * (1.2 + DEC * 0.2);
+            if(APS || DEC){
+                val = Math.max(APS,5 * (1 + DEC * 0.6) / solarCharging);
             }
             else{
                 val = Number(solarCharging) + SPU * 0.15
