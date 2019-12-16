@@ -82,7 +82,7 @@ function createTableData(wep, header){
     }
         
     var td = $(document.createElement("td"));
-	if(key.startsWith("#")){
+	if(key.startsWith("#")||key == "name"){
 		td.html(value);
 	}
 	else{
