@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: SystemList.html
+   -->
+   <meta charset="utf-8" />
+   <title>System List</title>
+   <link rel="stylesheet" href="style_sl.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+	
+		<nav></nav>
+        <header>
+            <div>
+                Filters:
+            </div>
+            <div>
+                <button onclick="resetConfig();">Reset</button>
+            </div>
+            <label for="max_level">Max Unlock Level:</label>
+            <div>
+                <input id="max_level" type="number" min="0" max="120" value = 120></input>
+            </div>
+        </header>
+        <table id = "main" class = "table">
+            <thead>
+                <tr>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="requiredLevel">Shields</th>
+                    <th class=sorter data-key="prefix">Speed</th>
+                    <th class=sorter data-key="gridSize">Turning</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupSystemList.js"></script>
+        
+    </body>
+
+</html>

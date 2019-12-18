@@ -354,7 +354,7 @@ function hideSelected(){
     selected.prop("checked",false);
     selected.parent().parent().hide();
     for(var i of selected){
-        config.hidden.push($(i).data("name"));
+        config.hidden.push($(i).data("id"));
     }
     saveConfigToQuery();
 }
@@ -363,8 +363,10 @@ function showOnlySelected(){
     notSelected.parent().parent().hide();
     $("#"+currentTable).find("input.show-hide-selector:checked").prop("checked",false);
     for(var i of notSelected){
-        config.hidden.push($(i).data("name"));
+        config.hidden.push($(i).data("id"));
     }
+	
+    saveConfigToQuery();
 }
 function editSelected(){
 	var selected = $("#"+currentTable).find("input.show-hide-selector:checked");

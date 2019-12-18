@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: SystemViewer.html
+   -->
+   <meta charset="utf-8" />
+   <title>System Viewer</title>
+   <link rel="stylesheet" href="style_c.css" />
+   <link rel="stylesheet" href="style_sv.css" />
+</head>
+    <body>
+		<nav></nav>
+		<header><h1 id=sector_name></h1><div><button onClick="toggleSpawns();">Toggle Spawn Centers</button></div></header>
+		<div class = "sector-container">
+			<svg id = "sectors" >
+				<defs>
+					<circle id = "spawn_point" class="spawn" cx="0" cy="0" r="2" />
+					<polygon id = "sector_outline" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill-opacity="0"></polygon>
+					<text id = "Unknown" text-anchor="middle" dominant-baseline="central" stroke=none>?</text>
+					<text id = "Burger" text-anchor="middle" dominant-baseline="central" stroke=none>M</text>
+					<g id = "Turrets">
+						<circle cx="0" cy="0" r="4" stroke=none />
+						<rect width="2" height=8 x = -1 y = 0 stroke=none>
+					</g>
+					<circle class = "star" id = "Star" cx="0" cy="0" r="5" stroke-width="0"/>
+					<circle id = "Substation" cx="0" cy="0" r="3" fill=none />
+					<g id = "SpaceStation">
+						
+						<circle cx="4.5" cy="4.5" r="1.5" fill=none />
+						<line x1 = 2.25 y1 = 2.25 x2 = 3.4 y2 = 3.4></line>
+						<circle cx="4.5" cy="-4.5" r="1.5" fill=none />
+						<line x1 = 2.25 y1 = -2.25 x2 = 3.4 y2 = -3.4></line>
+						<circle cx="-4.5" cy="4.5" r="1.5" fill=none />
+						<line x1 = -2.25 y1 = 2.25 x2 = -3.4 y2 = 3.4></line>
+						<circle cx="-4.5" cy="-4.5" r="1.5" fill=none />
+						<line x1 = -2.25 y1 = -2.25 x2 = -3.4 y2 = -3.4></line>
+						<circle cx="0" cy="0" r="3" fill=none />
+					</g>
+					<g id = "Minefield">
+						<circle cx="-4" cy="-4" r="0.5" stroke=none />
+						<circle cx="-2" cy="-4" r="0.5" stroke=none />
+						<circle cx="-0" cy="-4" r="0.5" stroke=none />
+						<circle cx="2" cy="-4" r="0.5" stroke=none />
+						<circle cx="4" cy="-4" r="0.5" stroke=none />
+						
+						<circle cx="-4" cy="-2" r="0.5" stroke=none />
+						<circle cx="-2" cy="-2" r="0.5" stroke=none />
+						<circle cx="-0" cy="-2" r="0.5" stroke=none />
+						<circle cx="2" cy="-2" r="0.5" stroke=none />
+						<circle cx="4" cy="-2" r="0.5" stroke=none />
+						
+						<circle cx="-4" cy="-0" r="0.5" stroke=none />
+						<circle cx="-2" cy="-0" r="0.5" stroke=none />
+						<circle cx="-0" cy="-0" r="0.5" stroke=none />
+						<circle cx="2" cy="-0" r="0.5" stroke=none />
+						<circle cx="4" cy="-0" r="0.5" stroke=none />
+						
+						<circle cx="-4" cy="2" r="0.5" stroke=none />
+						<circle cx="-2" cy="2" r="0.5" stroke=none />
+						<circle cx="-0" cy="2" r="0.5" stroke=none />
+						<circle cx="2" cy="2" r="0.5" stroke=none />
+						<circle cx="4" cy="2" r="0.5" stroke=none />
+						
+						<circle cx="-4" cy="4" r="0.5" stroke=none />
+						<circle cx="-2" cy="4" r="0.5" stroke=none />
+						<circle cx="-0" cy="4" r="0.5" stroke=none />
+						<circle cx="2" cy="4" r="0.5" stroke=none />
+						<circle cx="4" cy="4" r="0.5" stroke=none />
+					</g>
+					<radialGradient id ="Planet-Gradiant" fx = 25% fy = 25%>
+						<stop stop-color = "lightgrey" offset = "0%"/>
+						<stop stop-color = "black" offset = "8"/>
+					</radialGradient>
+					<circle id ="Planet" cx="0" cy="0" r="6" fill="url('#Planet-Gradiant')" stroke = none />
+					<rect id = "Refinery" width="6" height=6 x = -3 y = -3 fill=none>
+					<g id = "Jammer">
+						
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 3></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = -3></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 3></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = -3></line>
+						<circle cx="0" cy="0" r="2" stroke=none />
+					</g>
+					<g id = "LockingJammer">
+						
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<circle cx="0" cy="0" r="2" stroke=none />
+					</g>
+					<g id = "EffectJammer">
+						
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<circle cx="0" cy="0" r="2" stroke=none />
+					</g>
+					<g id = "StealthJammer">
+						
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<circle cx="0" cy="0" r="2" stroke=none />
+					</g>
+					<polygon id = "FreeForAll" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #222200></polygon>
+					<polygon id = "WarZone" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #221100></polygon>
+					<polygon id = "NeutralZone" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #002222></polygon>
+					<g id = "Asteroids"
+					 transform="translate(0,-97)">
+						<path
+						   d="m -6.7356484,95.918812 c 2.1922618,7.332728 2.4846846,7.260928 5.96206501,7.260928 3.47738049,0 8.08868959,-0.75595 5.97202319,-3.250586 -2.1166664,-2.494639 -0.2267857,-2.494639 1.0583332,-2.797021 1.2851189,-0.30238 2.8726187,-2.192261 -2.8726187,-4.838094 -5.7452374,-2.645833 -7.6287365,-0.504407 -8.7972118,0.615506 -1.6976669,1.627112 -1.3225909,3.009267 -1.3225909,3.009267 z"
+						   fill= #868686 
+						   stroke=none />
+					</g>
+				</defs>
+			</svg>
+		</div >
+		<div class="tooltip"></div>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupSystemViewer.js"></script>
+        
+    </body>
+
+</html>

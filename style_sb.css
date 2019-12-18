@@ -184,8 +184,6 @@ h2 {
 }
 .square {
 
-    position: relative;
-    padding-top: 100%;
     border: 1px solid #008cc4;
     cursor: pointer;
 }
@@ -196,13 +194,6 @@ h2 {
 .square:hover, .slot.selected .square:hover {
 
     border: 1px solid white;
-}
-.square>*{
-
-    position: absolute;
-    top:0;
-    left:0;
-
 }
 .slot-container-small{
   grid-row-start: 2;

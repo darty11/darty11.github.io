@@ -674,7 +674,7 @@ function getShipStat(ship, loadout, weaponData, stat){
                 }
                 
             }
-            val = getShipStat(ship, loadout, weaponData, "regenEnergy") * Math.max(0,stack*0.3-1)/(biggestStack*0.3);
+            val = getShipStat(ship, loadout, weaponData, "regenEnergy") * Math.max(0,1-(stack*0.3+1)/(biggestStack*0.3));
 			
             if(stack == 0){
 				val = getShipStat(ship, loadout, weaponData, "regenEnergy");
