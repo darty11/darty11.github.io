@@ -65,7 +65,7 @@ function repopulateTable(data){
         
         tableBody.append($(row));
         
-        if(config.hidden.includes(ship["name"]))
+        if(config.hidden.includes(ship["id"]))
         {
             $(row).hide();
         }
