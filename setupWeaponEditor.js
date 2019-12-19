@@ -239,7 +239,10 @@ function saveToQuery(){
 		for(var field in weapons[wep]){
 			if(!(field.startsWith("%")||field.startsWith("#")))
 			{
-				weaponsDic[wep][field] = weapons[wep][field];
+				if(weapons[wep][field] != weaponData[wep][field])
+				{
+					weaponsDic[wep][field] = weapons[wep][field];
+				}					
 			}
 		}
     }
