@@ -177,3 +177,6 @@ button:hover, a:hover{
 abbr {
     position: relative;
 }
+body{
+  min-width: 100%;
+}
