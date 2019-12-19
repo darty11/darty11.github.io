@@ -1,0 +1,78 @@
+#main td{
+  cursor: pointer;
+}
+#main td:first-child{
+   text-align:center;
+   padding:1px;
+     
+}
+
+#main tr:hover td{
+   
+  border: 1px solid #008cc4;
+  position:relative;
+}
+#main tr:hover td::before{
+  content:"";
+  width:100%;
+  position:absolute;
+  left:0;
+  top:-1px;
+  border: 1px solid #008cc4;
+  border-bottom: none;
+  z-index: 1;
+}
+
+#main th.sorter:hover{
+
+  z-index: 12;
+}
+
+
+#main td:nth-child(1),#main th:nth-child(1){
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  left:0px;
+  background-clip: padding-box;
+}
+
+//Set the z indexs of the rows and header so that the header is always on top.{}
+#main td:nth-child(1){
+  z-index:0;
+}
+#main tr:hover td:nth-child(1){
+  z-index:1;
+}
+#main th:nth-child(1){
+  z-index:10;
+}
+#main th{
+ z-index:9;
+}
+
+// Some css shenanigans to make the border between cells actually show up.{}
+#main td:nth-child(1):after{
+    content:'';
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    outline:  1px solid #003d5a;
+    z-index: -1;
+    background-color:black;
+}
+
+#main tr:hover td:nth-child(1):after{
+    content:'';
+    position:absolute;
+    right: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    outline:  1px solid #008cc4;
+    z-index: -1;
+    background-color:black;
+}
+
+

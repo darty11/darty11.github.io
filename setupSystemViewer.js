@@ -111,13 +111,26 @@ function getMinerals(x, y){
 	var val = "";
 	for(var spawn of systemObj.mineralSpawns){
 		var mineral = miningData[spawn.name.split(" ").join("_")];
-		var distance = distanceTo(x,y,spawn.location.x,spawn.location.y);
+		var distance = round(distanceTo(x,y,spawn.location.x,spawn.location.y));
 		var density = lerp(mineral.density, 0, distance / mineral.spawnRange);
 		if(density){
 			val += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
 		}
 	}
 	return val;
+}
+function round(val){
+	var fraction = val % 1;
+	var floor = val - fraction;
+	if(fraction == 0.5){
+		if(floor % 2 ){
+			return floor+1;
+		}
+	}
+	else if(fraction> 0.5){
+		return floor+1;
+	}
+	return floor;
 }
 function lerp(start, end, progress){
 	if(progress < 0){
@@ -129,10 +142,10 @@ function lerp(start, end, progress){
 	return start + (end - start) * progress;
 }
 function distanceTo(x,y,x2,y2){
-	if(x % 2 == 1){
+	if(y % 2 == 1){
 		x += 0.5;
 	}
-	if(x2 % 2 == 1){
+	if(y2 % 2 == 1){
 		x2 += 0.5;
 	}
 	var x3 = x-x2;
