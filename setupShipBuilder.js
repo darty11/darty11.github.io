@@ -371,6 +371,32 @@ function saveToStorage(){
         window.alert("Ship must have a name!");
     }
 }
+function generateBenString(){
+	var benString = shipData[currentShip].id;
+	benString+="|";
+	benString+=loadout.PRIMARY_WEAPON[0];
+	benString+="|";
+	var weapons = loadout.SECONDARY_WEAPON_STANDARD.concat(loadout.SECONDARY_WEAPON_UTILITY,loadout.SECONDARY_WEAPON_MINE,loadout.SECONDARY_WEAPON_PROXIMITY,loadout.SECONDARY_WEAPON_LARGE)
+	for(var weapon of weapons){
+		benString+=weapon+",";
+	}
+	if(weapons.length){
+		benString = benString.substring(0,benString.length-1)
+	}
+	benString+="|";
+	benString+=loadout.ENGINE[0];
+	benString+="|";	
+	benString+=loadout.SHIELD[0];
+	benString+="|";	
+	for(var aug of loadout.AUGMENTATION){
+		benString+=aug+",";
+	}
+	if(loadout.AUGMENTATION.length){
+		benString = benString.substring(0,benString.length-1)
+	}
+	window.alert(benString);
+}
+
 
 //Once the dom has loaded, setup the rest of it
 $(document).ready(function(){
