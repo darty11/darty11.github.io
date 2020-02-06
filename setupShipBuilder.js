@@ -394,6 +394,8 @@ function generateBenString(){
 	if(loadout.AUGMENTATION.length){
 		benString = benString.substring(0,benString.length-1)
 	}
+	benString = benString.replace("null,","");
+	benString = benString.replace("null","");
 	window.alert(benString);
 }
 
