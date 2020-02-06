@@ -395,6 +395,7 @@ function generateBenString(){
 		benString = benString.substring(0,benString.length-1)
 	}
 	benString = benString.replace(/null,/g,"");
+	benString = benString.replace(/,null/g,"");
 	benString = benString.replace(/null/g,"");
 	window.alert(benString);
 }
