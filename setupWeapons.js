@@ -1,6 +1,6 @@
 //Setting up global variables 
 var default_config = {
-    "races":[0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+	"races":[0],
     "sort":["name"],
     "sort_high_to_low":[false],
     "need_buyable":false,
@@ -17,6 +17,11 @@ var default_config = {
         "Programming":11
     },
     "hidden":[]
+}
+if(constants.races.length>2){
+	for(var i = 2; i<constants.races.length; i++){
+		default_config.races[i-1] = i;
+	}
 }
 var configs = {};
 var config = {};

@@ -25,6 +25,12 @@
     background-color:black;
     cursor: pointer;
 }
+
+
+.shipTree.fit .image-container{
+    margin: max(0.5125vw,10px);
+}
+
 .line-container{
     position:absolute;
     width: 100%;
@@ -44,4 +50,8 @@ body{
 }
 img {
     font-size:0.5em;
+}
+.shipTree.fit img {
+    max-width: max(4.1vw,40px);
+    max-height: max(4.1vw,40px);
 }
