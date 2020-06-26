@@ -583,7 +583,12 @@ function getShipStat(ship, loadout, weaponData, stat){
             }
             break;
         case "effectRegenEnergy":
-            val = getEffectTimePerSecond(loadout.SECONDARY_WEAPON_UTILITY, weaponData, "Energy Recharge") * 10;
+			var val = 0;
+			for (var effect in constants.effectRecharge) {
+				val += getEffectTimePerSecond(loadout.SECONDARY_WEAPON_UTILITY, weaponData, effect) * constants.effectRecharge[effect];
+			}
+			var DEC = getAugmentationLevel(loadout.AUGMENTATION, weaponData, "DartianConverter");
+			val += DEC * Math.min(getShipStat(ship, loadout, weaponData, "totalEnergy"),150)/10;
             break;
         case "allRegenEnergy":
             val = getShipStat(ship, loadout, weaponData, "effectRegenEnergy") + getShipStat(ship, loadout, weaponData, "regenEnergy");
