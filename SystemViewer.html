@@ -17,15 +17,187 @@
 				<defs>
 					<circle id = "spawn_point" class="spawn" cx="0" cy="0" r="2" />
 					<polygon id = "sector_outline" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill-opacity="0"></polygon>
-					<text id = "Unknown" text-anchor="middle" dominant-baseline="central" stroke=none>?</text>
-					<text id = "Burger" text-anchor="middle" dominant-baseline="central" stroke=none>M</text>
-					<g id = "Turrets">
-						<circle cx="0" cy="0" r="4" stroke=none />
-						<rect width="2" height=8 x = -1 y = 0 stroke=none>
+					<radialGradient id ="Nebula-Gradiant" fx = 50% fy = 50%>
+						<stop stop-color = "lightGrey" offset = "10%" stop-opacity = "0"/>
+						<stop stop-color = "lightGrey" offset = "100%" stop-opacity = "0.75"/>
+					</radialGradient>
+					<polygon id = "nebula-fill" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill="url(#Nebula-Gradiant)"></polygon>
+					
+					<path id = "arm" d="M 1.5 1 Q 3.5 2 5.5 -1 Q 3.5 3.5 0 2" stroke-width="0.5" /> 
+					<path id = "arm2" d="M -1.75 1.75 A 2 2, 0,0,1, 2 -5 A 3.5 3.5 , 0,0,0, -1.75 -1.75" stroke=none /> 
+					<path id = "arm3" d="M 1 0 C 1 -5, -5.5 -5 -5.5 2 C -8 -5, 2 -7.5 2 0" stroke=none /> 
+					<radialGradient id ="WhiteHole-Gradiant" fx = 50% fy = 50%>
+						<stop stop-color = "white" offset = "25%"/>
+						<stop stop-color = "cyan" offset = "75%"/>
+						<stop stop-color = "white" offset = "100%"/>
+					</radialGradient>
+					
+					<line id="wall-half" x1 = 8.6603 y1=0 x2 = 2 y2=0 stroke-width="0.74" />
+					
+					<g id = "Barrier-0" >
+						<use href="#wall-half" transform = "rotate(-60)"/>
+						<use href="#wall-half" transform = "rotate(120)"/>
 					</g>
-					<circle class = "star" id = "Star" cx="0" cy="0" r="5" stroke-width="0"/>
-					<circle id = "Substation" cx="0" cy="0" r="3" fill=none />
-					<g id = "SpaceStation">
+					<g id = "Barrier-1" >
+						<use href="#wall-half" transform = "rotate(0)"/>
+						<use href="#wall-half" transform = "rotate(180)"/>
+					</g>
+					<g id = "Barrier-2" >
+						<use href="#wall-half" transform = "rotate(60)"/>
+						<use href="#wall-half" transform = "rotate(-120)"/>
+					</g>
+					
+					<g id = "Barrier-3" >
+						<use href="#wall-half" transform = "rotate(180)"/>
+						<use href="#wall-half" transform = "rotate(-60)"/>
+					</g>
+					<g id = "Barrier-4" >
+						<use href="#wall-half" transform = "rotate(-120)"/>
+						<use href="#wall-half" transform = "rotate(0)"/>
+					</g>
+					<g id = "Barrier-5" >
+						<use href="#wall-half" transform = "rotate(-60)"/>
+						<use href="#wall-half" transform = "rotate(60)"/>
+					</g>					
+					<g id = "Barrier-6" >
+						<use href="#wall-half" transform = "rotate(0)"/>
+						<use href="#wall-half" transform = "rotate(120)"/>
+					</g>
+					<g id = "Barrier-7" >
+						<use href="#wall-half" transform = "rotate(60)"/>
+						<use href="#wall-half" transform = "rotate(180)"/>
+					</g>
+					<g id = "Barrier-8" >
+						<use href="#wall-half" transform = "rotate(120)"/>
+						<use href="#wall-half" transform = "rotate(-120)"/>
+					</g>
+					
+					
+					<g id = "spiral" >
+						<use href="#arm"/>
+						<use href="#arm" transform = "rotate(60)"/>
+						<use href="#arm" transform = "rotate(120)"/>
+						<use href="#arm" transform = "rotate(180)"/>
+						<use href="#arm" transform = "rotate(-120)"/>
+						<use href="#arm" transform = "rotate(-60)"/>
+						<circle cx="0" cy="0" r="2"  fill=none />
+					</g>
+					<radialGradient id ="WormHole-Gradiant" fx = 50% fy = 50%>
+						<stop stop-color = "#4444FF" offset = "25%"/>
+						<stop stop-color = "#9900FF" offset = "75%"/>
+						<stop stop-color = "#9900FF" offset = "100%" stop-opacity="0"/>
+					</radialGradient>
+					<g id = "WormHole-0" fill="url(#WormHole-Gradiant)" >
+						<use href="#arm2" fill="#9977FF" />
+						<use href="#arm2" transform = "rotate(-120)" fill="#9977FF" />
+						<use href="#arm2" transform = "rotate(120)" fill="#9977FF"/>
+						<circle cx="0" cy="0" r="3.3333333"  stroke="none"  />
+					</g>
+					
+					<g id = "SMB-0" >
+						<use href = "#spiral" stroke="orange" fill="orange" />
+						
+					</g>
+					<g id = "WhiteHole-0" >
+						<use href = "#spiral" stroke="white" fill="white" />
+						<circle cx="0" cy="0" r="2"  stroke="none" fill="url(#WhiteHole-Gradiant)" />
+					</g>
+					<g id = "BlackHole-0" >
+						<use href = "#spiral" stroke="purple" fill="purple" />
+						
+					</g>
+					<g id = "Pulsar-0" >
+						<use href = "#spiral" stroke="cyan" fill="cyan" />
+						<circle cx="0" cy="0" r="2"  stroke="none" fill="cyan" />
+					</g>
+					<text id = "Unfound" text-anchor="middle" dominant-baseline="central" stroke=none fill="red">!</text>
+					<text id = "Unknown-0" text-anchor="middle" dominant-baseline="central" stroke=none fill="white">?</text>
+					<text id = "MeteorBurger-0" text-anchor="middle" dominant-baseline="central" stroke=none fill="yellow" transform="scale(0.75)" >M</text>
+					 <linearGradient id="laser" x1="0" x2="0" y1="0" y2="100%">
+						<stop offset="0%" stop-color="#FF5500"/>
+						<stop offset="100%" stop-color="#FF5500" stop-opacity="0"/>
+					</linearGradient>
+					<g id = "turret">
+						<circle cx="0" cy="0" r="1.5" stroke=none />
+						<rect width="1" height="2.5" x="-0.5" y="0" stroke="none" />
+						<rect width="0.25" height="3.5" x="-1" y="1" fill="url(#laser)" stroke=none />
+					</g>
+					<g id = "turret-line">
+						<use href="#turret" 
+						transform="
+							translate(0,-5)
+							rotate(0)"
+						/>
+						<use href="#turret" 
+						transform="
+							translate(0,0)
+							rotate(90)"
+						/>
+						<use href="#turret" 
+						transform="
+							translate(0,5)
+							rotate(180)"
+						/>
+					</g>
+					<g id = "Turrets-0">
+						<use href="#turret"/>
+					</g>
+					
+					<g id = "Turrets-1">
+						<use href="#turret" 
+						transform="
+							translate(-3.5,-3.5)
+							rotate(135)"
+						/>
+						<use href="#turret" 
+						transform="
+							translate(3.5,-3.5)
+							rotate(-135)"
+						/>
+						<use href="#turret" 
+						transform="
+							translate(-3.5,3.5)
+							rotate(45)"
+						/>
+						<use href="#turret" 
+						transform="
+							translate(3.5,3.5)
+							rotate(-45)"
+						/>
+					</g>
+					<g id = "Turrets-2">
+						<use href="#turret-line"
+						transform="
+							rotate(90)"
+						/>
+					</g>
+					<g id = "Turrets-3">
+						<use href="#turret-line"
+							transform="
+								rotate(0)"
+						/>
+					</g>
+					<g id = "Turrets-4">
+						<use href="#turret-line"
+							transform="
+								rotate(30)"
+						/>
+					</g>
+					<g id = "Turrets-5">
+						<use href="#turret-line"
+							transform="
+								rotate(150)"
+						/>
+					</g>
+					<g id = "Turrets-6">
+						<use href="#turret" 
+						transform="
+							scale("2")"
+						/>
+					</g>
+					<circle class = "star" id = "Star-0" cx="0" cy="0" r="5" stroke-width="0"/>
+					<circle id = "Substation-0" cx="0" cy="0" r="3" fill=none />
+					<g id = "SpaceStation-0">
 						
 						<circle cx="4.5" cy="4.5" r="1.5" fill=none />
 						<line x1 = 2.25 y1 = 2.25 x2 = 3.4 y2 = 3.4></line>
@@ -37,7 +209,7 @@
 						<line x1 = -2.25 y1 = -2.25 x2 = -3.4 y2 = -3.4></line>
 						<circle cx="0" cy="0" r="3" fill=none />
 					</g>
-					<g id = "Minefield">
+					<g id = "Minefield-0">
 						<circle cx="-4" cy="-4" r="0.5" stroke=none />
 						<circle cx="-2" cy="-4" r="0.5" stroke=none />
 						<circle cx="-0" cy="-4" r="0.5" stroke=none />
@@ -68,65 +240,136 @@
 						<circle cx="2" cy="4" r="0.5" stroke=none />
 						<circle cx="4" cy="4" r="0.5" stroke=none />
 					</g>
-					<radialGradient id ="Planet-Gradiant" fx = 25% fy = 25%>
+					
+					<radialGradient id ="Planet-Gradiant" fx = 30% fy = 30%>
 						<stop stop-color = "lightgrey" offset = "0%"/>
 						<stop stop-color = "black" offset = "8"/>
 					</radialGradient>
-					<circle id ="Planet" cx="0" cy="0" r="6" fill="url('#Planet-Gradiant')" stroke = none />
-					<rect id = "Refinery" width="6" height=6 x = -3 y = -3 fill=none>
-					<g id = "Jammer">
-						
+
+					</radialGradient>
+					<circle id ="Planet-0" cx="0" cy="0" r="6" fill="url('#Planet-Gradiant')" stroke = none />
+					<rect id = "Refinery-0" width="6" height=6 x = -3 y = -3 fill=none />
+					<g id = "Jammer-0">
 						<line x1 = 0 y1 = 0 x2 = 3 y2 = 3></line>
 						<line x1 = 0 y1 = 0 x2 = 3 y2 = -3></line>
 						<line x1 = 0 y1 = 0 x2 = -3 y2 = 3></line>
 						<line x1 = 0 y1 = 0 x2 = -3 y2 = -3></line>
 						<circle cx="0" cy="0" r="2" stroke=none />
 					</g>
-					<g id = "LockingJammer">
+					<g id = "LockingJammer-0">
 						
-						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
-						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
-						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
-						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5 stroke-width=0.25></line>
+						<circle cx="2.5" cy="2.5" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5 stroke-width=0.25></line>
+						<circle cx="2.5" cy="-2.5" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5 stroke-width=0.25></line>
+						<circle cx="-2.5" cy="2.5" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5 stroke-width=0.25></line>
+						<circle cx="-2.5" cy="-2.5" r="0.5" stroke=none />
+
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3 stroke-width=0.25></line>
+						<circle cx="0" cy="3" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3 stroke-width=0.25></line>
+						<circle cx="0" cy="-3" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0 stroke-width=0.25></line>
+						<circle cx="-3" cy="0" r="0.5" stroke=none />
+						
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0 stroke-width=0.25></line>
+						<circle cx="3" cy="0" r="0.5" stroke=none />
+						
 						<circle cx="0" cy="0" r="2" stroke=none />
 					</g>
-					<g id = "EffectJammer">
+					<g id = "EffectJammer-0">
 						
-						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
-						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
-						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
-						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3.5 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = -3.5 y2 = 0 stroke-width=0.25></line>
+						<line x1 = 0 y1 = 0 x2 = 3.5 y2 = 0 stroke-width=0.25></line>
+						<circle cx="0" cy="0" r="2.85" stroke=none />
+					</g>
+					<g id = "StealthJammer-0">
+						
+						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0 stroke-width=0.5></line>
 						<circle cx="0" cy="0" r="2" stroke=none />
 					</g>
-					<g id = "StealthJammer">
+					<g id = "GravityJammer-0">
 						
-						<line x1 = 0 y1 = 0 x2 = 2.5 y2 = 2.5></line>
-						<line x1 = 0 y1 = 0 x2 =  2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 =  2.5></line>
-						<line x1 = 0 y1 = 0 x2 = -2.5 y2 = -2.5></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3></line>
-						<line x1 = 0 y1 = 0 x2 = 0 y2 = -3></line>
-						<line x1 = 0 y1 = 0 x2 = -3 y2 = 0></line>
-						<line x1 = 0 y1 = 0 x2 = 3 y2 = 0></line>
+						<line x1 = 0 y1 = 0 x2 = 3 y2 = -1.5 stroke-width=0.5></line>
+						<line x1 = 0 y1 = 0 x2 = 0 y2 = 3.5 stroke-width=0.5></line>
+						
+						<line x1 = 0 y1 = 0 x2 = -3 y2 = -1.5 stroke-width=0.5></line>
 						<circle cx="0" cy="0" r="2" stroke=none />
+						
+						<circle cx="0" cy="0" r="2.75" fill=none stroke-width=0.5 />
 					</g>
-					<polygon id = "FreeForAll" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #222200></polygon>
-					<polygon id = "WarZone" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #221100></polygon>
-					<polygon id = "NeutralZone" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #002222></polygon>
-					<g id = "Asteroids"
-					 transform="translate(0,-97)">
-						<path
-						   d="m -6.7356484,95.918812 c 2.1922618,7.332728 2.4846846,7.260928 5.96206501,7.260928 3.47738049,0 8.08868959,-0.75595 5.97202319,-3.250586 -2.1166664,-2.494639 -0.2267857,-2.494639 1.0583332,-2.797021 1.2851189,-0.30238 2.8726187,-2.192261 -2.8726187,-4.838094 -5.7452374,-2.645833 -7.6287365,-0.504407 -8.7972118,0.615506 -1.6976669,1.627112 -1.3225909,3.009267 -1.3225909,3.009267 z"
-						   fill= #868686 
-						   stroke=none />
+					
+					
+					<polygon id = "FreeForAll-0" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #444400></polygon>
+					<polygon id = "WarZone-0" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #442200></polygon>
+					<polygon id = "NeutralZone-0" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " stroke = none fill = #004444></polygon>
+					
+					<radialGradient id ="Asteroid-Gradiant" fx = 50% fy = 50%>
+					<stop stop-color = "lightgrey" offset = "0%"/>
+					<stop stop-color = "grey" offset = "75%"/>
+					<stop stop-color = "#585858" offset = "100%"/>
+					<g id = Asteroid transform="scale(1.5,1.5) translate(-130 -158)">
+						  <path d="m132.77 154.75c-0.18375-0.51783-1.2027 0.16705-1.5702 0.16705-0.3675 0-0.7684 0-1.1025 0.0167s-0.25057-0.28397-0.51783-0.26727c-0.26727 0.0167-1.2027 0.70158-1.2528 0.83522-0.0501 0.13363-0.85192 0.0668-1.0691 0.28397-0.21715 0.21716-1.1192 1.8041-1.1192 2.6393s0.51784 0.61806 0.70158 0.60136c0.18375-0.0167 0.16705 0.56794 0.16705 0.83521s0.75169 0.18375 0.90203 0.18375 2.0546 1.186 2.1214 1.3698c0.0668 0.18375 0.68488 0.56794 1.2862-0.20045 0 0 0.22285-0.42355 0.78982-0.42355 0.56696 0 1.3465-1.4647 1.5119-1.8899 0.16537-0.42522 0.4016-0.35435 0.4016-0.66146 0-0.3071-0.42522-1.5592-0.66145-2.2915-0.23624-0.73233-0.58859-1.1982-0.58859-1.1982z" fill="url('#Asteroid-Gradiant')" stroke="none"/>
+					</g>
+					<g transform="scale(1.1)" id = "Asteroids-0">
+						<use href = "#Asteroid"
+						
+						transform="translate(-2.5,-2.25)
+						rotate(60)
+						scale(0.325)"
+						/>
+						<use href = "#Asteroid"
+						
+						transform="translate(2.5,-0.5)
+						scale(0.4,-0.3)"
+						rotate(180)
+						/>
+						<use href = "#Asteroid"
+						
+						transform="translate(-1.5,4)
+						rotate(-120)
+						scale(0.3)"
+						/>
+						<use href = "#Asteroid"
+						
+						transform="translate(3,3.75)
+						rotate(-60)
+						scale(0.15)"
+						/>
+						<use href = "#Asteroid"
+						
+						transform="translate(-4.5,1.25)
+						rotate(0)
+						scale(0.15,0.125)"
+						/>
+
+						<use href = "#Asteroid"
+						
+						transform="translate(2.4,-4.5)
+						rotate(120)
+						scale(0.15)"
+						/>
+
 					</g>
 				</defs>
 			</svg>

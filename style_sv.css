@@ -33,9 +33,7 @@ body{
 html {
 	height:100%;
 }
-text{
-  fill:white;
-}
+
 .org-HA{
 	
   stroke:blue;
@@ -58,7 +56,7 @@ text{
 }
 .star{
   fill:white;
-	filter:drop-shadow(rgba(255, 255, 255, 1) 0px 0px 10px);
+	filter:drop-shadow(rgb(255, 255, 255) 0px 0px 1px) drop-shadow(rgb(255, 255, 255) 0px 0px 1px);
 }
 nav{
   grid-column-start:1;

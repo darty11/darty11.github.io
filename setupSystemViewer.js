@@ -54,8 +54,11 @@ function createSector(sectorObject, x, y){
 	outline.setAttribute("href","#sector_outline");
 	if(getSectorType(sectorObject.type) != "Empty"){
 		var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
-		if($("#"+getSectorType(sectorObject.type)).length){
-			ast.setAttribute("href","#"+getSectorType(sectorObject.type) );
+		var subType = sectorObject.subType;
+		subType = subType < 0? 0:subType;
+		var iconID = "#"+getSectorType(sectorObject.type)+"-"+subType;
+		if($(iconID).length){
+			ast.setAttribute("href",iconID);
 			switch(sectorObject.owner){
 				case 0:
 					ast.setAttribute("class","org-HA");
@@ -72,10 +75,17 @@ function createSector(sectorObject, x, y){
 			}
 		}
 		else{
-			ast.setAttribute("href","#Unknown" );
+			ast.setAttribute("href","#Unfound" );
 		}
 		
 		node.appendChild(ast);
+	}
+	
+	if(sectorObject.nebulaDensity > 0){
+		var fog = document.createElementNS("http://www.w3.org/2000/svg","use");
+		fog.setAttribute("href","#nebula-fill");
+		fog.setAttribute("fill-opacity",sectorObject.nebulaDensity);
+		node.appendChild(fog);
 	}
 	if(sectorObject.spawner){
 		var spawn = document.createElementNS("http://www.w3.org/2000/svg","use");
@@ -92,6 +102,7 @@ function createSector(sectorObject, x, y){
 		node.appendChild(radius);
 		node.appendChild(spawn);
 	}
+	
 	node.setAttribute("class","sector");
 	var html = "";
 	html += "<h1>"+sectorObject.name+"</h1>"
