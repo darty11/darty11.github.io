@@ -255,10 +255,16 @@ function calcExtension(wep, name){
             val = wep.maxSpeedMod * wep.propulsionEnhance;
             break;
         case "averageBoost":
-            val = (calcExtension(wep,"#topBoost")+wep.maxSpeedMod)/2
+			if(wep.propulsionEnhanceCooldown < 1){ //speed will always be above max speed. 
+				val = (calcExtension(wep,"#topBoost")*2 + (wep.propulsionEnhanceCooldown*(wep.maxSpeedMod-calcExtension(wep,"#topBoost"))))/2 //averages the top speed and a lerp between top speed and max speed.
+			}
+			else
+			{
+				val = (calcExtension(wep,"#topBoost")-wep.maxSpeedMod)/(2*wep.propulsionEnhanceCooldown)+wep.maxSpeedMod
+			}
             break;
         case "boostCost":
-            val = 15/wep.propulsionEnhanceTime;
+            val = 15/(wep.propulsionEnhanceTime*wep.propulsionEnhanceCooldown);
             break;
         case "reverseSpeed":
             val = wep.maxSpeedMod * wep.reverseSpeedMod;
