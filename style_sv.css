@@ -49,10 +49,9 @@ html {
   stroke:Yellow;
   fill:Yellow;
 }
-.org-PI{
-	
-  stroke:grey;
-  fill:grey;
+.org-PI {
+    stroke: #48604a;
+    fill: #48604a;
 }
 .star{
   fill:white;
