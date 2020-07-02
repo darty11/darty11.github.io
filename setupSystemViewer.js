@@ -1,11 +1,17 @@
 var galaxyData = {};
 var miningData = {};
+var warpData = {};
+var idToName = {};
 var system = "Delta_Trianguli";
 
 
 //Json-p callback
-function loadGalaxyData(data){
+function loadGalaxyData(data,warps){
     galaxyData = data;
+	warpData = warps;
+	for(var gal in galaxyData){
+		idToName[galaxyData[gal].id-1] = gal;
+	}
 	checkData();
 }
 //Json-p callback
@@ -28,6 +34,17 @@ function setupSystem(){
 	for(var spawn of systemObj.mineralSpawns){
 		systemObj.sectors[spawn.location.y].columns[spawn.location.x].spawner = spawn;
 	}
+	for(var warp in warpData){
+		var warpObject = warpData[warp];
+		var loc1 = buildLocation(warpObject.fromLocation,warpObject);
+		var loc2 = buildLocation(warpObject.toLocation,warpObject);
+		if(idToName[loc1.starSystemID] == system){
+			systemObj.sectors[loc1.y].columns[loc1.x].warp = loc2;
+		}
+		if(idToName[loc2.starSystemID] == system){
+			systemObj.sectors[loc2.y].columns[loc2.x].warp = loc1;
+		}
+	}
 	for(var i = 0; i < systemObj.sectors.length; i++){
 		var columns = systemObj.sectors[i].columns;
 		for(var j = 0; j < columns.length; j++){
@@ -42,6 +59,14 @@ function setupSystem(){
 	$("#sectors")[0].setAttribute("viewBox", viewbox);
 	$("#sector_name").html(systemObj.name);
 }
+
+function buildLocation(loc, warp){
+	loc.name = warp.name;
+	loc.team = warp.team;
+	loc.isWormhole = warp.isWormhole;
+	return loc;
+}
+
 function getSectorType(id){
 	return constants.lookup.sectorType[id];
 }
@@ -75,7 +100,7 @@ function createSector(sectorObject, x, y){
 			}
 		}
 		else{
-			ast.setAttribute("href","#Unfound" );
+			ast.setAttribute("href","#Unfound");
 		}
 		
 		node.appendChild(ast);
@@ -103,6 +128,43 @@ function createSector(sectorObject, x, y){
 		node.appendChild(spawn);
 	}
 	
+	if(sectorObject.warp){
+		if(sectorObject.warp.isWormhole){
+			var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
+			ast.setAttribute("href","#WormHole-0");
+			node.appendChild(ast);
+		}
+		else{
+			var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
+			var warpType = "#BigWarp";
+			var angle = 0;
+			var warpSystemName = idToName[sectorObject.warp.starSystemID];
+			if(idToName[sectorObject.warp.starSystemID] == system){
+				warpType = "#SmallWarp";
+				angle = angleTo(sectorObject.warp.x, sectorObject.warp.y,x,y);
+			}
+			else{
+				angle = -Math.atan2(galaxyData[warpSystemName].position.z-galaxyData[system].position.z,galaxyData[warpSystemName].position.x-galaxyData[system].position.x)* 180 / Math.PI;
+			}
+			ast.setAttribute("transform","rotate("+angle+")");
+			ast.setAttribute("href",warpType);
+			switch(sectorObject.warp.team){
+				case 0:
+					ast.setAttribute("class","org-HA");
+					break;
+				case 1:
+					ast.setAttribute("class","org-AE");
+					break;
+				case 2:
+					ast.setAttribute("class","org-FI");
+					break;
+				case 3:
+					ast.setAttribute("class","org-PI");
+					break;
+			}
+			node.appendChild(ast);
+		}
+	}
 	node.setAttribute("class","sector");
 	var html = "";
 	html += "<h1>"+sectorObject.name+"</h1>"
@@ -162,6 +224,18 @@ function distanceTo(x,y,x2,y2){
 	var x3 = x-x2;
 	var y3 = y-y2;
 	return Math.sqrt(x3*x3 + y3*y3);
+}
+
+function angleTo(x,y,x2,y2){
+	if(y % 2 == 1){
+		x += 0.5;
+	}
+	if(y2 % 2 == 1){
+		x2 += 0.5;
+	}
+	var x3 = x-x2;
+	var y3 = y-y2;
+	return Math.atan2(y3,x3) * 180 / Math.PI;
 }
 function getSectorX(column, row){
 	var x = 8.6603 + column * 17.3206;

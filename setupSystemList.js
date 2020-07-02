@@ -1,6 +1,6 @@
 //Setting up global variables 
 var default_config = {
-    "max_level":120,
+    "max_level":150,
     "sort":["requiredLevel"],
     "sort_high_to_low":[false],
 }
@@ -108,8 +108,8 @@ function compareViaConfig(ship1, ship2, index){
 }
 //manages user input for the level field
 function updateLevel(){
-    if($(this).val()>120){
-        $(this).val(120);
+    if($(this).val()>150){
+        $(this).val(150);
     }
     else if($(this).val()<0){
         $(this).val(0);

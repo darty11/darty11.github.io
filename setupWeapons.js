@@ -61,39 +61,44 @@ function repopulateTable(data){
     var headers = $("#"+currentTable+" thead tr th");
     var tableBody = $("#"+currentTable).find("tbody");
     tableBody.empty();
+	
+	var array = new Array();
     for(var key of filteredSortedData){
-        var row = document.createElement("tr");
-        var ship = key[1];
-        headers.each(function(){
-            row.appendChild(createTableData(ship,this));
-        });
-        
-        tableBody.append($(row));
-        
-        if(config.hidden.includes(ship["id"]))
+        //var row = document.createElement("tr");
+		var wep = key[1];
+		var start = "<tr>"
+		if(config.hidden.includes(wep["id"]))
         {
-            $(row).hide();
+            start = '<tr class = "hidden">'
         }
+		array[array.length] = "<tr>";
+        
+        headers.each(function(){
+            array[array.length] = createTableData(wep,this);
+        });
+        array[array.length] = "</tr>";
+        //tableBody.append($(row));
     }
+	tableBody.html(array.join(""));
 }
 /*populates an individual cell of the table with data (does not place said cell into the html though)
     Uses the data- attribute of the provided header to pull/generate a value from the weapon object. 
 */
-function createTableData(ship, header){
+function createTableData(wep, header){
     var key = $(header).data("key")
     var value = "";
     
-    value = ship[key];
+    value = wep[key];
     if(!isNaN(parseInt(value)) && "" != value){
         value = Math.round(value*1000)/1000;
     }
         
-    var td = document.createElement("td");
+    //var td = document.createElement("td");
     if($(header).data("scroll")){
         value = "<div class=scroll-cell>"+value+"</div>"
     }
-    td.innerHTML = value;
-    return td;
+    //td.innerHTML = value;
+    return "<td>"+value+"</td>";
 }
 
 //Filters the weapon data based off of the config object.
@@ -169,6 +174,15 @@ function updateRace(){
         }
         config.races.remove(index);
     }
+    
+    repopulateTable(weaponData);
+}
+function updateRaceSingle(){
+    var index = $(this).data("index")
+    
+    config.races = [index];
+	$(".races-container input").prop("checked",false);
+    $(this).prop("checked",true);
     
     repopulateTable(weaponData);
 }
@@ -413,6 +427,7 @@ $(document).ready(function(){
     
     $(document).on("input","#need_buyable",updateBuyable);
     $(document).on("input",".races-container input",updateRace);
+    $(document).on("dblclick",".races-container input",updateRaceSingle);
     $(document).on("input",".skills-container input",updateSkill);
     $(document).on("click",".table-control",updateTabeles);
     $(document).on("click",".sorter",doSort);

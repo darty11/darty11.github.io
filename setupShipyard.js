@@ -129,23 +129,36 @@ function updateBuyable(){
     config.need_buyable=$(this).prop("checked");
     repopulateTable(shipData);
 }
+
+var last_clicked_time = -1;
+var last_clicked_index = -1;
 //manages user inputs for race buttons.
 function updateRace(){
     var index = $(this).data("index")
-    var checked = $(this).prop("checked");
-    
-    if(checked){
-        config.races.push(index);
-    }
-    else{
-        if(config.races.length == 1){
-            $(this).prop("checked",true);
-            return;
-        }
-        config.races.remove(index);
-    }
-    
+    var time = new Date().valueOf();
+    //check for double click, if double click make this the only selected race.
+	if(index == last_clicked_index && last_clicked_time+500 > time){
+		config.races = [index]
+		$(".races-container input").prop("checked",false);
+		$(this).prop("checked",true);
+		last_clicked_index = -1;
+	}
+	else{
+		var checked = $(this).prop("checked");
+		last_clicked_index = index;
+		if(checked){
+			config.races.push(index);
+		}
+		else{
+			if(config.races.length == 1){
+				$(this).prop("checked",true);
+				return;
+			}
+			config.races.remove(index);
+		}
+	}	
     repopulateTable(shipData);
+	last_clicked_time = new Date().valueOf();
 }
 //manages user input for the level field
 function updateLevel(){
