@@ -10,27 +10,49 @@ function restoreConfigToDefault(){
     config = $.extend(true,{},default_config);
 }
 restoreConfigToDefault();
-var shipData = {}
+var galaxyData = {};
+var miningData = {};
 
 //Json-p callback
 function loadGalaxyData(data){
-    shipData = data;
-    var query = getQuerys();
-    if(!$.isEmptyObject(query)){
-        for(var item in query){
-            if(item in config){
-                config[item] = JSON.parse(query[item]);
-            }
-        }
-        synchronizeConfig();
-    }
-    repopulateTable(data);
-    
+    galaxyData = data;
+	checkData();
+}
+function loadMiningData(data){
+    miningData = data;
+	checkData();
+}
+function checkData(){
+	if(!$.isEmptyObject(miningData) && !$.isEmptyObject(galaxyData)){
+		var query = getQuerys();
+		var headerRow = $("#main thead tr");
+		for(var mineralName in miningData){
+			var mineral = miningData[mineralName];
+			if(mineral.level == 0){
+				var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("-")+'"></th>');
+				header.html(mineral.name);
+				headerRow.append(header);
+			}
+		}
+
+		addSortingButtons();
+		if(!$.isEmptyObject(query)){
+			for(var item in query){
+				if(item in config){
+					config[item] = JSON.parse(query[item]);
+				}
+			}
+			synchronizeConfig();
+		}
+
+		repopulateTable(galaxyData);
+	}
 }
 //populates the table 
 function repopulateTable(data){
     saveConfigToQuery();
     var filteredSortedData = sortData(filterData(data));
+
     var headers = $("#main thead tr th");
     var tableBody = $("#main").find("tbody");
     tableBody.empty();
@@ -38,6 +60,7 @@ function repopulateTable(data){
         var row = document.createElement("tr");
         var system = key[1];
 		row.dataset.system = key[0];
+		
         headers.each(function(){
             row.appendChild(createTableData(system,this));
         });
@@ -51,7 +74,33 @@ function createTableData(system, header){
     var key = $(header).data("key")
     var value = "";
     
-	value = system[key];
+	if(key.startsWith("%")){
+		switch(key){
+			case "%averageDark":
+				value = 5 * (1 + 1 * 0.6) / system["averageCharge"];
+		}
+	}
+	else if(key.startsWith("#")){
+		var mineral = key.substring(1,key.length);
+		if(!("spawnCounts" in system)){
+			system.spawnCounts = {};
+			for(var spawner of system.mineralSpawns){
+				var name = spawner.name.split(" ").join("-");
+				var old = system.spawnCounts[name];
+				system.spawnCounts[name] = 1 + (old?old:0);
+			}
+		}
+		if(mineral in system.spawnCounts){
+			value = system.spawnCounts[mineral];
+		}
+		else{
+			value = 0;
+		}
+	
+	}
+	else{
+		value = system[key];
+	}
 	if(!isNaN(parseInt(value)) && "" != value){
 		value = Math.round(value*10000)/10000;
 	}
@@ -115,7 +164,7 @@ function updateLevel(){
         $(this).val(0);
     }
     config.max_level=$(this).val();
-    repopulateTable(shipData);
+    repopulateTable(galaxyData);
 }
 //makes the sorting arrows match the sorting status of their collumn 
 function synchronizeSortingButtons(){
@@ -168,7 +217,7 @@ function doSort(){
         config.sort_high_to_low.unshift(false);
     }
     synchronizeSortingButtons();
-    repopulateTable(shipData);
+    repopulateTable(galaxyData);
 }
 //synchs the ui with the config by changing the value of ui elements to match the config.
 function synchronizeConfig(){
@@ -188,7 +237,7 @@ function saveConfigToQuery(){
 function resetConfig(){
     restoreConfigToDefault();
     synchronizeConfig();
-    repopulateTable(shipData);
+    repopulateTable(galaxyData);
 }
 //Opens the ship builder in a new tab
 function goToSystem(){
@@ -199,16 +248,18 @@ function goToSystem(){
 	window.location.href = locationString;
 }
 
-//Once the dom has loaded, load the shipdata info via json-p.
+//Once the dom has loaded, load the galaxyData info via json-p.
 $(document).ready(function(){
     config.max_level = $("#max_level").val();
     synchronizeConfig();
-    addSortingButtons();
     var script = document.createElement("script");
     script.id = "jsonp";
     script.src = "GalaxyData.json-p"
     document.body.appendChild(script);
-    
+    var script = document.createElement("script");
+    script.id = "jsonp2";
+    script.src = "MiningData.json-p"
+    document.body.appendChild(script);
     $(document).on("input","#max_level",updateLevel);
     $(document).on("click",".sorter",doSort);
 	$(document).on("click","tbody tr",goToSystem);

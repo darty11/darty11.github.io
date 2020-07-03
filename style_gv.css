@@ -1,0 +1,118 @@
+#systems {
+	/*! width:50%; */
+	height: 100%;
+	position: absolute;
+	/*! margin: auto; */
+	display: inline-block;
+	width: 100%;
+}
+.sectorBox {
+	/*stroke:#003d5a;*/
+}
+
+svg>g{
+	stroke:#003d5a;
+}
+body{
+ width:100%;
+	display: grid;
+  grid-template-rows: auto auto 1fr;
+ height: 100%;
+ grid-template-columns: 1fr auto;
+}
+.system-container {
+	height: 100%;
+	grid-row-start: 3;
+	position: relative;
+	/*! text-align: center; */
+}
+html {
+	height:100%;
+}
+
+.color-0{
+  fill:rgb(255, 255, 200);
+	filter:drop-shadow(rgb(255, 255, 200) 0px 0px 1px) drop-shadow(rgb(255, 255, 200) 0px 0px 1px);
+}
+.color-1{
+  fill:rgb(255, 200, 200);
+	filter:drop-shadow(rgb(255, 200, 200) 0px 0px 1px) drop-shadow(rgb(255, 200, 200) 0px 0px 1px);
+}
+.color-2{
+  fill:rgb(235, 255, 255);
+	filter:drop-shadow(rgb(0, 0, 255) 0px 0px 3px);
+}
+.color-3{
+  fill:rgb(255, 255, 255);
+	filter:drop-shadow(rgb(255, 255, 255) 0px 0px 1px) drop-shadow(rgb(255, 255, 255) 0px 0px 1px);
+}
+.color-4{
+  fill:rgb(80, 255, 80);
+	filter:drop-shadow(rgb(255, 255, 200) 0px 0px 1px) drop-shadow(rgb(255, 255, 255) 0px 0px 1px);
+}
+nav{
+  grid-column-start:1;
+	grid-column-end:3;
+  grid-row-start: 1;
+}
+.tooltip {
+
+  border-left: 2px solid #003d5a;
+}
+h1{
+	text-align: center;
+	padding: .67em;
+	margin:0;
+	
+  border-bottom: 2px solid #003d5a;
+}
+p{
+	text-align: center;
+	margin:0;
+	padding:1em;
+  border-bottom: 1px solid #003d5a;
+	
+}
+.tooltip {
+  min-width: 200px;
+  grid-column-start: 2;
+  grid-row-end: 4;
+  grid-row-start: 2;
+}
+header {
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+.org-HA{
+	stroke-dasharray:0.125,0.375;
+  stroke:blue;
+  fill:blue;
+}
+.org-AE{
+	stroke-dasharray:0.125,0.375;
+  stroke-dashoffset:0.125;
+  stroke:red;
+  fill:red;
+}
+.org-FI{
+	stroke-dasharray:0.125,0.375;
+  stroke-dashoffset:0.25;
+  stroke:Yellow;
+  fill:Yellow;
+}
+.org-PI {
+  stroke-dasharray:0.125,0.375;
+  stroke-dashoffset:0.375;
+    stroke: #48604a;
+    fill: #48604a;
+}
+.org-Worm {
+  stroke-dasharray:0.125,0.375;
+  stroke-dashoffset:0.0625;
+    stroke: #8800FF;
+}
+.org-White {
+  stroke-dasharray:0.125,0.375;
+  stroke-dashoffset:0.3125;
+    stroke: white;
+}

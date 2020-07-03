@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: GalaxyViewer.html
+   -->
+   <meta charset="utf-8" />
+   <title>Galaxy Viewer</title>
+   <link rel="stylesheet" href="style_c.css" />
+   <link rel="stylesheet" href="style_gv.css" />
+</head>
+    <body>
+		<nav></nav>
+		<div class = "system-container">
+			<svg viewbox="-32 -14 46 19" id = "systems" >
+				<defs>
+					<circle class = "star" id = "Star-0" cx="0" cy="0" r="0.15" stroke-width="0"/>
+					<marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5"
+						markerWidth="15" markerHeight="15"
+						orient="auto-start-reverse" stroke = "#8800FF" stroke-width="0.3" >
+					  <path d="M 0 4 L 2 5 L 0 6 z" />
+					</marker>
+					<marker id="tail" viewBox="0 0 10 10" refX="5" refY="5"
+						markerWidth="15" markerHeight="15"
+						orient="auto-start-reverse" stroke = "#8800FF" stroke-width="0.3" >
+					  <path d="M 2 4 L 0 5 L 2 6 z" />
+					</marker>
+					<marker id="arrow-white" viewBox="0 0 10 10" refX="5" refY="5"
+						markerWidth="15" markerHeight="15"
+						orient="auto-start-reverse" stroke = "white" stroke-width="0.3" >
+					  <path d="M 0 4 L 2 5 L 0 6 z" />
+					</marker>
+					<marker id="tail-white" viewBox="0 0 10 10" refX="5" refY="5"
+						markerWidth="15" markerHeight="15"
+						orient="auto-start-reverse" stroke = "white" stroke-width="0.3" >
+					  <path d="M 2 4 L 0 5 L 2 6 z" />
+					</marker>
+					<circle class "outline" id = "Outline" cx="0" cy="0" r="0.75" fill = "black" stroke-width="0.15" stroke = "#44ff99"/>
+				</defs>
+			</svg>
+		</div >
+		<div class="tooltip"></div>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupGalaxyViewer.js"></script>
+        
+    </body>
+
+</html>
