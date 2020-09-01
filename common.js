@@ -38,6 +38,9 @@ function expandedPosition(jElement){
     epos.bottom = offset.top + height;
     return epos;
 }
+function getWeaponClass(weapon){
+	return weapon.craftable?'craftable':weapon.race?"npr":weapon.buyable?"buyable":weapon.seasonal?"seasonal":"locked";
+}
 //parses the query string into a string dictionary.
 function getQuerys(){
     var string = location.search;
@@ -928,6 +931,17 @@ function linkRangesAndSubWeapons(weaponRanges, variants, weaponData){
 			}
         }
 
+    }
+}
+//links the weapons to their craftable
+function linkCraftables(craftables, weaponData){
+    
+    for(var craftableName in craftables){
+        var craft = craftables[craftableName];
+        
+        for(var weapon of craft.items){
+            weaponData[weapon].craftable = craft;
+        }
     }
 }
 //very expensive function used to fix a bug in the game that prevents engine ranges from containing their items.

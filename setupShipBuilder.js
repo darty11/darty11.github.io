@@ -17,6 +17,7 @@ var shipData = {};
 var weaponData = {};
 var weaponRanges = {};
 var weaponVariants = [];
+var craftables = {};
 
 var selectedWeapon = "";
 var selectedSlotType = "";
@@ -32,15 +33,18 @@ function loadWeaponData(data){
     weaponData = data;
     onDataLoad()
 }
-function loadWeaponRangeAndVariantData(rages, variants){
+function loadWeaponRangeAndVariantData(rages, variants, craft){
     weaponRanges = rages;
     weaponVariants = variants;
+	craftables = craft;
     onDataLoad()
 }
 function onDataLoad(){
     if(!$.isEmptyObject(shipData) && !$.isEmptyObject(weaponData) && !$.isEmptyObject(weaponRanges)){
 		//found in common.js
         linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
+        //found in common.js
+		linkCraftables(craftables,weaponData);
 		//found in common.js
         fixEngines(weaponRanges,weaponData);
         initializeShipbuilder();
@@ -88,32 +92,40 @@ function initializeShipbuilder(){
 function validateLoadout(){
     var ship = shipData[currentShip];
     for(var slotType in loadout){
+		var length = 0;
         switch(slotType){
             case "PRIMARY_WEAPON":
             case "ENGINE":
             case "SHIELD":
-                loadout[slotType] = loadout[slotType].splice(0,1);
+                length = 1;
                 break;
             case "AUGMENTATION":
-                loadout[slotType] = loadout[slotType].splice(0,ship.augmentations);
+                length = ship.augmentations;
+				
                 break;
             case "SECONDARY_WEAPON_STANDARD":
-                loadout[slotType] = loadout[slotType].splice(0,ship.standardSecondary);
+                length = ship.standardSecondary;
                 break;
             case "SECONDARY_WEAPON_UTILITY":
-                loadout[slotType] = loadout[slotType].splice(0,ship.utilitySecondary);
+                length = ship.utilitySecondary;
                 break;
             case "SECONDARY_WEAPON_MINE":
-                loadout[slotType] = loadout[slotType].splice(0,ship.mineSecondary);
+                length = ship.mineSecondary;
                 break;
             case "SECONDARY_WEAPON_PROXIMITY":
-                loadout[slotType] = loadout[slotType].splice(0,ship.proximitySecondary);
+                length = ship.proximitySecondary;
                 break;
             case "SECONDARY_WEAPON_LARGE":
-                loadout[slotType] = loadout[slotType].splice(0,ship.largeSecondary);
+                length = ship.largeSecondary;
                 break;
             
         }
+		loadout[slotType] = loadout[slotType].splice(0,length);
+		if(length>0){
+		
+			loadout[slotType][length-1] = loadout[slotType][length-1] || null;
+		}	
+		
     }
 }
 //Calculates and displays various statistics about the ship with its current loadout.
@@ -155,10 +167,10 @@ function populateWeaponsTable(tableType){
             }
             var htmlFrag = "";
             if(topWep){
-                htmlFrag += '<tr data-top = true data-range="'+rangeId+'" data-id="'+topWep.id+'"><td class="expander '+((weps.length==0)?"disabled":"")+'"><span class="expand">+</span><span class="collapse">-</span></td><td "><img src='+ getSmallItemIcon(topWep.iconName) +' width="30" height="30"></img></td><td>'+ topWep.name +'</td></tr>'
+                htmlFrag += '<tr class = "'+getWeaponClass(topWep)+'" data-top = true data-range="'+rangeId+'" data-id="'+topWep.id+'"><td class="expander '+((weps.length==0)?"disabled":"")+'"><span class="expand">+</span><span class="collapse">-</span></td><td "><img src='+ getSmallItemIcon(topWep.iconName) +' width="30" height="30"></img></td><td>'+ topWep.name +'</td></tr>'
 
                 for(weapon of weps){
-                    htmlFrag += '<tr style = "display:none" data-range="'+rangeId+'" data-id="'+weapon.id+'"><td></td><td><img src='+ getSmallItemIcon(weapon.iconName) +' width="30" height="30"></img></td><td>'+ weapon.name +'</td></tr>'
+                    htmlFrag += '<tr class = "'+getWeaponClass(weapon)+'" style = "display:none" data-range="'+rangeId+'" data-id="'+weapon.id+'"><td></td><td><img src='+ getSmallItemIcon(weapon.iconName) +' width="30" height="30"></img></td><td>'+ weapon.name +'</td></tr>'
                 }
                 html += htmlFrag;
             }
@@ -246,6 +258,8 @@ function synchronizeWeaponIcons(){
                     slot.find("img").attr("src",getSmallItemIcon(weapon.iconName));
                     slot.attr("data-weapon",weapon.id);
                     slot.find(".weapon-name").text(shortenWeaponName(weapon.name))
+					slot.find(".weapon-name").removeClass( "craftable npr buyable seasonal locked").addClass(getWeaponClass(weapon));
+					
                 }
                 else{
                     slot.addClass("empty");
@@ -394,9 +408,9 @@ function generateBenString(){
 	if(loadout.AUGMENTATION.length){
 		benString = benString.substring(0,benString.length-1)
 	}
-	benString = benString.replace(/null,/g,"");
-	benString = benString.replace(/,null/g,"");
-	benString = benString.replace(/null/g,"");
+	//benString = benString.replace(/null,/g,"");
+	//benString = benString.replace(/,null/g,"");
+	benString = benString.replace(/null/g," ");
 	window.alert(benString);
 }
 

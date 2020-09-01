@@ -401,7 +401,7 @@ function editSelected(){
 }
 //Once the dom has loaded, load the weapondata info via json-p.
 $(document).ready(function(){
-    config.need_buyable = $("#need_buyable").prop("checked");
+    //config.need_buyable = $("#need_buyable").prop("checked");
     populateRaceButtons();
     populateSkillInputs();
     addSortingButtons();

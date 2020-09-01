@@ -112,22 +112,6 @@ function createSector(sectorObject, x, y){
 		fog.setAttribute("fill-opacity",sectorObject.nebulaDensity);
 		node.appendChild(fog);
 	}
-	if(sectorObject.spawner){
-		var spawn = document.createElementNS("http://www.w3.org/2000/svg","use");
-		var mineral = miningData[sectorObject.spawner.name.split(" ").join("_")];
-		spawn.setAttribute("href","#spawn_point");
-		spawn.setAttribute("fill",getRGB(mineral.color));
-		spawn.setAttribute("stroke",getRGB(mineral.secondaryColour));
-		spawn.setAttribute("class","mineral-spawn");
-		var radius = document.createElementNS("http://www.w3.org/2000/svg","circle");
-		radius.setAttribute("class","mineral-spawn-radius");
-		radius.setAttribute("r",(mineral.spawnRange-0.5)*17.3206);
-		radius.setAttribute("fill","none");
-		radius.setAttribute("stroke",getRGB(mineral.secondaryColour));
-		node.appendChild(radius);
-		node.appendChild(spawn);
-	}
-	
 	if(sectorObject.warp){
 		if(sectorObject.warp.isWormhole){
 			var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
@@ -165,6 +149,23 @@ function createSector(sectorObject, x, y){
 			node.appendChild(ast);
 		}
 	}
+	if(sectorObject.spawner){
+		var spawn = document.createElementNS("http://www.w3.org/2000/svg","use");
+		var mineral = miningData[sectorObject.spawner.name.split(" ").join("_")];
+		spawn.setAttribute("href","#spawn_point");
+		spawn.setAttribute("fill",getRGB(mineral.color));
+		spawn.setAttribute("stroke",getRGB(mineral.secondaryColour));
+		spawn.setAttribute("class","mineral-spawn");
+		var radius = document.createElementNS("http://www.w3.org/2000/svg","circle");
+		radius.setAttribute("class","mineral-spawn-radius");
+		radius.setAttribute("r",(mineral.spawnRange-0.5)*17.3206);
+		radius.setAttribute("fill","none");
+		radius.setAttribute("stroke",getRGB(mineral.secondaryColour));
+		node.appendChild(radius);
+		node.appendChild(spawn);
+	}
+	
+
 	node.setAttribute("class","sector");
 	var html = "";
 	html += "<h1>"+sectorObject.name+"</h1>"

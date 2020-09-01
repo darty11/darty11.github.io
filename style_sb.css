@@ -304,3 +304,15 @@ body {
     grid-column-start: 3;
 
 }
+.npr {
+  color:#ccFFCC
+}
+.craftable {
+  color:#ccccff
+}
+.seasonal {
+  color:#FF88FF
+}
+.locked {
+  color:#cc8888
+}
