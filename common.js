@@ -186,7 +186,7 @@ function calcExtension(wep, name){
                 val = (100/wep.ammoOrEnergyUsage) * calcExtension(wep,"#dpshot");
             }
             else{
-                 val = wep.ammoOrEnergyUsage * calcExtension(wep,"#dpshot");
+                val = wep.ammoOrEnergyUsage * calcExtension(wep,"#dpshot");
             }
             break;
         case "effectDps":

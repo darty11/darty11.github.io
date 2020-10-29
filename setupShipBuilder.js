@@ -1,6 +1,8 @@
 //global variables
 var defaultShip = "Starfighter";
 var currentShip = "";
+var benStringLoadoutStack = ["SECONDARY_WEAPON_STANDARD","SECONDARY_WEAPON_UTILITY","SECONDARY_WEAPON_MINE","SECONDARY_WEAPON_PROXIMITY","SECONDARY_WEAPON_LARGE"];
+
 var loadout = {
     "PRIMARY_WEAPON":["pl"],
     "ENGINE":["s"],
@@ -54,17 +56,22 @@ function onDataLoad(){
 function initializeShipbuilder(){
     var query = getQuerys();
     if(!$.isEmptyObject(query)){
-        for(var item in query){
-            if(item in loadout){
-                loadout[item] = JSON.parse(query[item]);
-            }
-        }
-        if(query.ship){
-            currentShip = query.ship;
-        }
-		if(query.name){
-            $("#ship_custom_name").val(query.name);
-        }
+		if(query.importString){
+			loadBenString(query.importString);
+		}
+		else{
+			for(var item in query){
+				if(item in loadout){
+					loadout[item] = JSON.parse(query[item]);
+				}
+			}
+			if(query.ship){
+				currentShip = query.ship;
+			}
+			if(query.name){
+				$("#ship_custom_name").val(query.name);
+			}
+		}
     }
     if(!(currentShip in shipData)){
         currentShip = defaultShip;
@@ -88,38 +95,44 @@ function initializeShipbuilder(){
     updateLeftPanel();
 }
 
+function getSlotLength(slotType){
+	
+    var ship = shipData[currentShip];
+	var length = 0;
+	switch(slotType){
+		case "PRIMARY_WEAPON":
+		case "ENGINE":
+		case "SHIELD":
+			length = 1;
+			break;
+		case "AUGMENTATION":
+			length = ship.augmentations;
+			
+			break;
+		case "SECONDARY_WEAPON_STANDARD":
+			length = ship.standardSecondary;
+			break;
+		case "SECONDARY_WEAPON_UTILITY":
+			length = ship.utilitySecondary;
+			break;
+		case "SECONDARY_WEAPON_MINE":
+			length = ship.mineSecondary;
+			break;
+		case "SECONDARY_WEAPON_PROXIMITY":
+			length = ship.proximitySecondary;
+			break;
+		case "SECONDARY_WEAPON_LARGE":
+			length = ship.largeSecondary;
+			break;
+		
+	}
+	return length;
+}
+
 //goes through the loadout and splices the weapon lists so that they are as long as the max length they can be.
 function validateLoadout(){
-    var ship = shipData[currentShip];
     for(var slotType in loadout){
-		var length = 0;
-        switch(slotType){
-            case "PRIMARY_WEAPON":
-            case "ENGINE":
-            case "SHIELD":
-                length = 1;
-                break;
-            case "AUGMENTATION":
-                length = ship.augmentations;
-				
-                break;
-            case "SECONDARY_WEAPON_STANDARD":
-                length = ship.standardSecondary;
-                break;
-            case "SECONDARY_WEAPON_UTILITY":
-                length = ship.utilitySecondary;
-                break;
-            case "SECONDARY_WEAPON_MINE":
-                length = ship.mineSecondary;
-                break;
-            case "SECONDARY_WEAPON_PROXIMITY":
-                length = ship.proximitySecondary;
-                break;
-            case "SECONDARY_WEAPON_LARGE":
-                length = ship.largeSecondary;
-                break;
-            
-        }
+		length = getSlotLength(slotType);
 		loadout[slotType] = loadout[slotType].splice(0,length);
 		if(length>0){
 		
@@ -411,7 +424,53 @@ function generateBenString(){
 	//benString = benString.replace(/null,/g,"");
 	//benString = benString.replace(/,null/g,"");
 	benString = benString.replace(/null/g," ");
-	window.alert(benString);
+	window.alert(benString + "\n\n"+genLocationAndQuerys({
+		"importString":benString
+	}));
+}
+
+function loadBenString(benString){
+	var stack = benString.split("|");
+	var shipID = stack[0];
+	var ship = shipData[defaultShip];
+	for(var shipName in shipData){
+		if(shipData[shipName].id == shipID){
+			ship = shipData[shipName];
+			currentShip = shipName;
+			break;
+		}
+	}
+	
+	loadout.PRIMARY_WEAPON[0] = stack[1];
+	
+	var weaponStack = stack[2].split(",");
+	var loadoutStackIndex = 0;
+	var loadoutTypeIndex = 0;
+	loop:
+	for(var weapon of weaponStack){
+		while(loadoutTypeIndex>=getSlotLength(benStringLoadoutStack[loadoutStackIndex])){
+			loadoutTypeIndex = 0;
+			loadoutStackIndex++;
+			
+			if(loadoutStackIndex>benStringLoadoutStack.length){
+				break loop;
+			}
+		}
+		if(weapon != " "){
+			loadout[benStringLoadoutStack[loadoutStackIndex]][loadoutTypeIndex++] = weapon;
+		}
+	}
+	
+	loadout.ENGINE[0] = stack[3];
+	
+	loadout.SHIELD[0] = stack[4];
+	
+	var augs = stack[5].split(",");
+	for(var i = 0; i<augs.length; i++){
+		if(augs[i] != " "){
+			loadout.AUGMENTATION[i] = augs[i];
+		}
+	}
 }
 
 

@@ -1,6 +1,6 @@
 //Setting up global variables 
 var default_config = {
-    "max_level":120,
+    "max_level":200,
     "races":[0,1],
     "sort":["unlockLevel"],
     "sort_high_to_low":[false],
@@ -162,8 +162,8 @@ function updateRace(){
 }
 //manages user input for the level field
 function updateLevel(){
-    if($(this).val()>120){
-        $(this).val(120);
+    if($(this).val()>200){
+        $(this).val(200);
     }
     else if($(this).val()<0){
         $(this).val(0);
