@@ -28,29 +28,7 @@ function compileExtensions(table){
     return extensions;
 }
 
-//Json-p callback additionally, it parses the query string to figure out which weapons will be edited.
-function loadWeaponData(data){
-    weaponData = data;
-	try {
-			
-		var qWeapons = JSON.parse(getQuerys().weapons);
 
-		for(var id in qWeapons){
-			weapons[id] = qWeapons[id];
-			for(var prop in weaponData[id]){
-				if(!(prop in weapons[id])){
-					weapons[id][prop] = weaponData[id][prop];
-				}
-			}
-		}
-	}
-	catch(e){
-		window.alert("Invalid Query:"+e);
-	}
-	var extensions = compileExtensions(currentTable);
-	extendData(extensions,weaponData);
-	repopulateTable(weapons);
-}
 //populates the table 
 function repopulateTable(data){
     saveToQuery();
@@ -276,9 +254,33 @@ function changeStat(){
     repopulateTable(weapons);
 }
 
+getJsonP("weapons");
+
 //Once the dom has loaded, load the weapondata info via json-p.
 $(document).ready(function(){
     
+	
+	weaponData = constants.weapons;
+	try {
+			
+		var qWeapons = JSON.parse(getQuerys().weapons);
+
+		for(var id in qWeapons){
+			weapons[id] = qWeapons[id];
+			for(var prop in weaponData[id]){
+				if(!(prop in weapons[id])){
+					weapons[id][prop] = weaponData[id][prop];
+				}
+			}
+		}
+	}
+	catch(e){
+		window.alert("Invalid Query:"+e);
+	}
+	var extensions = compileExtensions(currentTable);
+	extendData(extensions,weaponData);
+	repopulateTable(weapons);
+	
     var query = getQuerys();
     if(!$.isEmptyObject(query)){
         for(var item in query){
@@ -293,10 +295,6 @@ $(document).ready(function(){
     synchronizeConfig();
     synchronizeTables();
     
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "WeaponData.json-p"
-    document.body.appendChild(script);
     $(document).on("click",".sorter",doSort);
 	
     $(document).on("change","input",changeStat); //use change instead of input because the input being edited gets recreated with this method.

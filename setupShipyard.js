@@ -14,21 +14,6 @@ function restoreConfigToDefault(){
 restoreConfigToDefault();
 var shipData = {}
 
-//Json-p callback
-function loadShipData(data){
-    shipData = data;
-    var query = getQuerys();
-    if(!$.isEmptyObject(query)){
-        for(var item in query){
-            if(item in config){
-                config[item] = JSON.parse(query[item]);
-            }
-        }
-        synchronizeConfig();
-    }
-    repopulateTable(data);
-    
-}
 //populates the table 
 function repopulateTable(data){
     saveConfigToQuery();
@@ -278,6 +263,7 @@ function goToShipBuilder(){
 	var win = window.open(locationString, '_blank');
 	win.focus();
 }
+getJsonP("ships");
 
 //Once the dom has loaded, load the shipdata info via json-p.
 $(document).ready(function(){
@@ -286,10 +272,18 @@ $(document).ready(function(){
     populateRaceButtons();
     synchronizeConfig();
     addSortingButtons();
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "ShipData.json-p"
-    document.body.appendChild(script);
+	
+	shipData = constants.ships;
+    var query = getQuerys();
+    if(!$.isEmptyObject(query)){
+        for(var item in query){
+            if(item in config){
+                config[item] = JSON.parse(query[item]);
+            }
+        }
+        synchronizeConfig();
+    }
+    repopulateTable(constants.ships);
     
     $(document).on("input","#need_buyable",updateBuyable);
     $(document).on("input","#max_level",updateLevel);

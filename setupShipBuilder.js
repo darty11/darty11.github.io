@@ -26,32 +26,7 @@ var selectedSlotType = "";
 var selectedSlot;
 
 var activeAug = false;
-//JSON-p callbacks. Save the data and then call onDataLoad, which checks if all the data is loaded and if it is starts setting up the page.
-function loadShipData(data){
-    shipData = data;
-    onDataLoad()
-}
-function loadWeaponData(data){
-    weaponData = data;
-    onDataLoad()
-}
-function loadWeaponRangeAndVariantData(rages, variants, craft){
-    weaponRanges = rages;
-    weaponVariants = variants;
-	craftables = craft;
-    onDataLoad()
-}
-function onDataLoad(){
-    if(!$.isEmptyObject(shipData) && !$.isEmptyObject(weaponData) && !$.isEmptyObject(weaponRanges)){
-		//found in common.js
-        linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
-        //found in common.js
-		linkCraftables(craftables,weaponData);
-		//found in common.js
-        fixEngines(weaponRanges,weaponData);
-        initializeShipbuilder();
-    }
-}
+
 //loads data from the query string, validates it, then sets up the weapon slots and populates them with the current loadout.
 function initializeShipbuilder(){
     var query = getQuerys();
@@ -472,24 +447,27 @@ function loadBenString(benString){
 		}
 	}
 }
-
+getJsonP("ships");
+getJsonP("weapons");
+getJsonP("ranges");
+getJsonP("craftable");
+getJsonP("variant_ranges");
 
 //Once the dom has loaded, setup the rest of it
 $(document).ready(function(){
     
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "ShipData.json-p"
-    document.body.appendChild(script);
-    script = document.createElement("script");
-    script.id = "jsonp2";
-    script.src = "WeaponData.json-p"
-    document.body.appendChild(script);
-    script = document.createElement("script");
-    script.id = "jsonp3";
-    script.src = "WeaponExtraData.json-p"
-    document.body.appendChild(script);
-    
+	shipData = constants.ships;
+	weaponData = constants.weapons;
+    weaponRanges = constants.ranges;
+    weaponVariants = constants.variant_ranges;
+	craftables = constants.craftable;
+	//found in common.js
+	linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
+	//found in common.js
+	linkCraftables(craftables,weaponData);
+	//found in common.js
+	fixEngines(weaponRanges,weaponData);
+	initializeShipbuilder();
     $(document).on("click",".slot .square",selectSlot);
     $(document).on("contextmenu",".slot .square",removeWeapon);
     $(document).on("click",".expander",expandRow);

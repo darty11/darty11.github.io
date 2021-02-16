@@ -2,22 +2,6 @@ var galaxyData = {};
 var warpData = {};
 var idToName = [];
 
-//Json-p callback
-function loadGalaxyData(data,warps){
-    galaxyData = data;
-	warpData = warps;
-	for(var gal in galaxyData){
-		idToName[galaxyData[gal].id-1] = gal;
-	}
-	checkData();
-}
-
-function checkData(){
-	if(!$.isEmptyObject(galaxyData)){
-		setupGalaxy();
-	}
-}
-
 
 function setupGalaxy(){
    
@@ -294,12 +278,15 @@ function showTooltip(){
 	$(this).parent().append($(this));
 	$(".tooltip").html($(this).attr("data-popup"));
 }
+getJsonP("gates");
+getJsonP("systems");
 $(document).ready(function(){
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "GalaxyData.json-p"
-    document.body.appendChild(script);
-	
+	galaxyData = constants.systems;
+	warpData = constants.gates;
+	for(var gal in galaxyData){
+		idToName[galaxyData[gal].id-1] = gal;
+	}
+	setupGalaxy();
 	$(document).on("click", ".sector", showTooltip);
 
 });

@@ -5,54 +5,39 @@ var shipData = {};
 var weaponData = {};
 var weaponRanges = {};
 var weaponVariants = [];
-//JSON-p callbacks. Save the data and then call onDataLoad, which checks if all the data is loaded and if it is starts setting up the page.
-function loadShipData(data){
-    shipData = data;
-    onDataLoad();
-}
-function loadWeaponData(data){
-    weaponData = data;
-    onDataLoad();
-}
-function loadWeaponRangeAndVariantData(rages, variants){
-    weaponRanges = rages;
-    weaponVariants = variants;
-    onDataLoad();
-}
+
 //loads ships from local storage and put them into the main table
 function onDataLoad(){
-    if(!$.isEmptyObject(shipData) && !$.isEmptyObject(weaponData) && !$.isEmptyObject(weaponRanges)){
-        linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
-        fixEngines(weaponRanges,weaponData);
-		var shipNames = JSON.parse(window.localStorage.getItem("ships")) || [];
-		for(var name of shipNames){
-			var ship = JSON.parse(window.localStorage.getItem("ships_"+name));
-			if(ship){
-				customShips[name] = $.extend(
-					false,
-					{
-						"shipID":ship.ship,
-						"customName":ship.name,
-						"loadout":ship.loadout
-					},
-					shipData[ship.ship]
-				);
+	linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
+	fixEngines(weaponRanges,weaponData);
+	var shipNames = JSON.parse(window.localStorage.getItem("ships")) || [];
+	for(var name of shipNames){
+		var ship = JSON.parse(window.localStorage.getItem("ships_"+name));
+		if(ship){
+			customShips[name] = $.extend(
+				false,
+				{
+					"shipID":ship.ship,
+					"customName":ship.name,
+					"loadout":ship.loadout
+				},
+				shipData[ship.ship]
+			);
+		}
+	}
+	var headers = $("#main thead tr th");
+	for(var header of headers){
+		header = $(header);
+		var key = header.data("key");
+		if(key.startsWith(".")){
+			for(var shipName in customShips){
+				customShips[shipName][key] = getShipStat(customShips[shipName], customShips[shipName].loadout, weaponData, key.substring(1,key.length));
 			}
 		}
-		var headers = $("#main thead tr th");
-		for(var header of headers){
-			header = $(header);
-			var key = header.data("key");
-			if(key.startsWith(".")){
-				for(var shipName in customShips){
-					customShips[shipName][key] = getShipStat(customShips[shipName], customShips[shipName].loadout, weaponData, key.substring(1,key.length));
-				}
-			}
-		}
+	}
+	
+	repopulateTable({});
 		
-		repopulateTable({});
-		
-    }
 }
 
 //populates the table 
@@ -136,17 +121,20 @@ function deleteShip(){
 	repopulateTable({});
 	return false;
 }
+
+getJsonP("ships");
+getJsonP("weapons");
+getJsonP("ranges");
+getJsonP("variant_ranges");
+
+
 //Once the dom has loaded, load the shipdata info via json-p.
 $(document).ready(function(){
-	
-	var script = document.createElement("script");
-    script.id = "jsonp2";
-    script.src = "WeaponData.json-p"
-    document.body.appendChild(script);
-    script = document.createElement("script");
-    script.id = "jsonp3";
-    script.src = "WeaponExtraData.json-p"
-    document.body.appendChild(script);
+	shipData = constants.ships;
+	weaponData = constants.weapons;
+    weaponRanges = constants.ranges;
+    weaponVariants = constants.variant_ranges;
+	onDataLoad();
 	
 	$(document).on("click",".delete-button",deleteShip);
    

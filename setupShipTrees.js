@@ -2,18 +2,6 @@ var shipData = {}
 var aralien = false;
 
 
-//Json-p callback
-function loadShipData(data){
-    shipData = data;
-    repopulateTree();
-    var race = getQuerys().race;
-    if(race == "aralien"){
-        enable_aralien();
-    }
-    else{
-        enable_human();
-    }
-}
 //Recreates the tree
 function repopulateTree(){
     $("#HumanShips").children(".tree-node").remove();
@@ -95,13 +83,18 @@ function goToShipBuilder(){
 	var win = window.open(locationString, '_blank');
 	win.focus();
 }
+getJsonP("ships");
 
 $(document).ready(function(){
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "ShipData.json-p"
-    document.body.appendChild(script);
-	
+	shipData = constants.ships;
+	repopulateTree();
+    var race = getQuerys().race;
+    if(race == "aralien"){
+        enable_aralien();
+    }
+    else{
+        enable_human();
+    }
     $(document).on("click",".image-container",goToShipBuilder);
     $(window).resize(redrawLines);
 

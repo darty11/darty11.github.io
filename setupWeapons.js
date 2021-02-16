@@ -46,13 +46,6 @@ function compileExtensions(table){
     return extensions;
 }
 
-//Json-p callback
-function loadWeaponData(data){
-    weaponData = data;
-
-    repopulateTable(data);
-    
-}
 //populates the table 
 function repopulateTable(data){
     saveConfigToQuery();
@@ -399,6 +392,8 @@ function editSelected(){
 	var win = window.open(locationString, '_blank');
 	win.focus();
 }
+getJsonP("weapons");
+
 //Once the dom has loaded, load the weapondata info via json-p.
 $(document).ready(function(){
     //config.need_buyable = $("#need_buyable").prop("checked");
@@ -420,10 +415,9 @@ $(document).ready(function(){
     synchronizeConfig();
     synchronizeTables();
     
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "WeaponData.json-p"
-    document.body.appendChild(script);
+    weaponData = constants.weapons;
+
+    repopulateTable(weaponData);
     
     $(document).on("input","#need_buyable",updateBuyable);
     $(document).on("input",".races-container input",updateRace);

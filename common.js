@@ -21,6 +21,9 @@ function getSmallShipIcon(name){
 function getSmallItemIcon(name){
     return 'http://www.starfighterinfinity.com/sf/sfinew/icons/Items/'+encodeURIComponent(name)+'.png';
 }
+function getLargeItemIcon(name,type){
+    return 'https://www.benoldinggames.co.uk/sfi/gamedata/icons/'+encodeURIComponent(type)+"/"+encodeURIComponent(name)+'.png';
+}
 function getBigShipIcon(name){
     return 'http://www.starfighterinfinity.com/sf/sfinew/icons/shipsBig/'+encodeURIComponent(name)+'.png';
 }
@@ -75,6 +78,10 @@ function setQuerys(queryObj){
 }
 //takes an ID and returns a name corresponding to the name of the effect stored in constants.effects
 function effectName(id){
+	console.log(id);
+	if(id<-1){
+		return "WTFBen";
+	}
     return id==-1||isNaN(id)?"None":constants.effects[id].name;
 }
 //takes an effect name and returns how much damage it does

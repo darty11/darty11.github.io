@@ -13,40 +13,31 @@ restoreConfigToDefault();
 var galaxyData = {};
 var miningData = {};
 
-//Json-p callback
-function loadGalaxyData(data){
-    galaxyData = data;
-	checkData();
-}
-function loadMiningData(data){
-    miningData = data;
-	checkData();
-}
 function checkData(){
-	if(!$.isEmptyObject(miningData) && !$.isEmptyObject(galaxyData)){
-		var query = getQuerys();
-		var headerRow = $("#main thead tr");
-		for(var mineralName in miningData){
-			var mineral = miningData[mineralName];
-			if(mineral.level == 0){
-				var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("-")+'"></th>');
-				header.html(mineral.name);
-				headerRow.append(header);
-			}
+	
+	var query = getQuerys();
+	var headerRow = $("#main thead tr");
+	for(var mineralName in miningData){
+		var mineral = miningData[mineralName];
+		if(mineral.level == 0){
+			var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("-")+'"></th>');
+			header.html(mineral.name);
+			headerRow.append(header);
 		}
-
-		addSortingButtons();
-		if(!$.isEmptyObject(query)){
-			for(var item in query){
-				if(item in config){
-					config[item] = JSON.parse(query[item]);
-				}
-			}
-			synchronizeConfig();
-		}
-
-		repopulateTable(galaxyData);
 	}
+
+	addSortingButtons();
+	if(!$.isEmptyObject(query)){
+		for(var item in query){
+			if(item in config){
+				config[item] = JSON.parse(query[item]);
+			}
+		}
+		synchronizeConfig();
+	}
+
+	repopulateTable(galaxyData);
+
 }
 //populates the table 
 function repopulateTable(data){
@@ -248,18 +239,17 @@ function goToSystem(){
 	window.location.href = locationString;
 }
 
+getJsonP("systems");
+getJsonP("minerals");
+
 //Once the dom has loaded, load the galaxyData info via json-p.
 $(document).ready(function(){
+	
+	galaxyData = constants.systems;
+    miningData = constants.minerals;
+	checkData();
     config.max_level = $("#max_level").val();
     synchronizeConfig();
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "GalaxyData.json-p"
-    document.body.appendChild(script);
-    var script = document.createElement("script");
-    script.id = "jsonp2";
-    script.src = "MiningData.json-p"
-    document.body.appendChild(script);
     $(document).on("input","#max_level",updateLevel);
     $(document).on("click",".sorter",doSort);
 	$(document).on("click","tbody tr",goToSystem);

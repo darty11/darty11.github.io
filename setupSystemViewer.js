@@ -4,31 +4,6 @@ var warpData = {};
 var idToName = {};
 var system = "Delta_Trianguli";
 
-
-//Json-p callback
-function loadGalaxyData(data,warps){
-    galaxyData = data;
-	warpData = warps;
-	for(var gal in galaxyData){
-		idToName[galaxyData[gal].id-1] = gal;
-	}
-	checkData();
-}
-//Json-p callback
-function loadMiningData(data){
-    miningData = data;
-	checkData();
-}
-function checkData(){
-	if(!$.isEmptyObject(miningData) && !$.isEmptyObject(galaxyData)){
-		if(getQuerys().system){
-			system = getQuerys().system;
-		}
-		setupSystem();
-	}
-}
-
-
 function setupSystem(){
     var systemObj = galaxyData[system];
 	for(var spawn of systemObj.mineralSpawns){
@@ -254,17 +229,20 @@ function showTooltip(){
 	$(this).parent().append($(this));
 	$(".tooltip").html($(this).attr("data-popup"));
 }
+
+getJsonP("systems");
+getJsonP("minerals");
+
 $(document).ready(function(){
-    var script = document.createElement("script");
-    script.id = "jsonp";
-    script.src = "GalaxyData.json-p"
-    document.body.appendChild(script);
 	
 	
-    var script = document.createElement("script");
-    script.id = "jsonp2";
-    script.src = "MiningData.json-p"
-    document.body.appendChild(script);
+	galaxyData = constants.systems;
+    miningData = constants.minerals;
+	if(getQuerys().system){
+		system = getQuerys().system;
+	}
+	setupSystem();
+	
 	$(document).on("click", ".sector", showTooltip);
 
 });
