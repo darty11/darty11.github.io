@@ -20,7 +20,7 @@ function checkData(){
 	for(var mineralName in miningData){
 		var mineral = miningData[mineralName];
 		if(mineral.level == 0){
-			var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("-")+'"></th>');
+			var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("_")+'"></th>');
 			header.html(mineral.name);
 			headerRow.append(header);
 		}
@@ -35,7 +35,24 @@ function checkData(){
 		}
 		synchronizeConfig();
 	}
-
+	for(var key in galaxyData){
+		var system = galaxyData[key];
+		
+		if(!("spawnCounts" in system)){
+			system.spawnCounts = {};
+			for(var spawner of system.mineralSpawns){
+				var name = spawner.name.split(" ").join("_");
+				var old = system.spawnCounts[name];
+				system.spawnCounts[name] = 1 + (old?old:0);
+			}
+		}
+		for(var mineralName in miningData){
+			if(!(mineralName.split(" ").join("_") in system.spawnCounts)){
+				system.spawnCounts[mineralName.split(" ").join("_")] = 0;
+			}
+		}
+		
+	}
 	repopulateTable(galaxyData);
 
 }
@@ -73,20 +90,8 @@ function createTableData(system, header){
 	}
 	else if(key.startsWith("#")){
 		var mineral = key.substring(1,key.length);
-		if(!("spawnCounts" in system)){
-			system.spawnCounts = {};
-			for(var spawner of system.mineralSpawns){
-				var name = spawner.name.split(" ").join("-");
-				var old = system.spawnCounts[name];
-				system.spawnCounts[name] = 1 + (old?old:0);
-			}
-		}
-		if(mineral in system.spawnCounts){
-			value = system.spawnCounts[mineral];
-		}
-		else{
-			value = 0;
-		}
+		
+		value = system.spawnCounts[mineral];
 	
 	}
 	else{
@@ -133,17 +138,34 @@ function compareViaConfig(ship1, ship2, index){
         return 0;
     }
     var key = config.sort[index];
+
     var backwards = config.sort_high_to_low[index];
     var val = 0;
-    if(ship1[key]==ship2[key]){
-        return compareViaConfig(ship1, ship2, index+1);
-    }
-    else if(ship1[key]>ship2[key]){
-        val = 1;
-    }
-    else{
-        val = -1
-    }
+	if(key.startsWith("#")){
+		var mineral = key.substring(1,key.length);
+		if(ship1.spawnCounts[mineral]==ship2.spawnCounts[mineral]){
+			return compareViaConfig(ship1, ship2, index+1);
+		}
+		else if(ship1.spawnCounts[mineral]>ship2.spawnCounts[mineral]){
+			val = 1;
+		}
+		else{
+			val = -1
+		}
+		
+
+	}
+	else{
+		if(ship1[key]==ship2[key]){
+			return compareViaConfig(ship1, ship2, index+1);
+		}
+		else if(ship1[key]>ship2[key]){
+			val = 1;
+		}
+		else{
+			val = -1
+		}
+	}
     return val*(backwards?-1:1);
 }
 //manages user input for the level field

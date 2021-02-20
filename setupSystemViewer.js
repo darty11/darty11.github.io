@@ -52,7 +52,15 @@ function createSector(sectorObject, x, y){
 	node.setAttribute("transform",translate);
 	var outline = document.createElementNS("http://www.w3.org/2000/svg","use");
 	outline.setAttribute("href","#sector_outline");
+	var backline = document.createElementNS("http://www.w3.org/2000/svg","use");
+	backline.setAttribute("href","#sector_outline2");
+	backline.setAttribute("transform",translate);
+	document.getElementById("backlines").appendChild(backline);
 	if(getSectorType(sectorObject.type) != "Empty"){
+		if(getSectorType(sectorObject.type) == "Asteroids"){
+			node.classList.add("Asteroids");
+			backline.classList.add("Asteroids");
+		}
 		var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
 		var subType = sectorObject.subType;
 		subType = subType < 0? 0:subType;
@@ -124,7 +132,35 @@ function createSector(sectorObject, x, y){
 			node.appendChild(ast);
 		}
 	}
+
+	node.classList.add("sector");
+	var [rates, hotspots, gradiant] = getMinerals(x,y);
+	var html = "";
+	html += "<h1>"+sectorObject.name+"</h1>";
+	html += '<div class="tooltip-info">';
+	html += '<div class="rates">';
+	html += '<h3>Rates</h3>';
+	html += rates;
+	html += '</div>';
+	html += '<div class="hotspots">';
+	html += '<h3>Hotspots</h3>';
+	html += hotspots;
+	html += '</div>';
+	html += '</div>';
+	node.setAttribute("data-popup",html);
+	var gradId = "sectorGradiant-"+x+"-"+y;
+	gradiant.id = gradId;
+	document.getElementById("gradiantsDef").appendChild(gradiant);
+	var minerals = document.createElementNS("http://www.w3.org/2000/svg","use");
+	minerals.setAttribute("href","#mineralComposition");
+	minerals.setAttribute("fill","url(#"+gradId+")");
+	minerals.setAttribute("class","mineral-density");
+	node.appendChild(minerals)
+	
 	if(sectorObject.spawner){
+		var spawnOutline = document.createElementNS("http://www.w3.org/2000/svg","use");
+		spawnOutline.setAttribute("href","#spawn_outline");
+		spawnOutline.setAttribute("class","mineral-outline");
 		var spawn = document.createElementNS("http://www.w3.org/2000/svg","use");
 		var mineral = miningData[sectorObject.spawner.name.split(" ").join("_")];
 		spawn.setAttribute("href","#spawn_point");
@@ -136,38 +172,80 @@ function createSector(sectorObject, x, y){
 		radius.setAttribute("r",(mineral.spawnRange-0.5)*17.3206);
 		radius.setAttribute("fill","none");
 		radius.setAttribute("stroke",getRGB(mineral.secondaryColour));
+		node.appendChild(spawnOutline);
 		node.appendChild(radius);
 		node.appendChild(spawn);
 	}
 	
-
-	node.setAttribute("class","sector");
-	var html = "";
-	html += "<h1>"+sectorObject.name+"</h1>"
-	html += getMinerals(x,y);
-	node.setAttribute("data-popup",html);
+	
 	node.appendChild(outline);
+	
+	
     return node;
 }
 function getRGB(colorObj){
 	return "rgb("+255*colorObj.r+","+255*colorObj.g+","+255*colorObj.b+")";
 }
 function toggleSpawns(){
-	$("#sectors").toggleClass("spawns")
+	$("#sectors").toggleClass("spawns");
+}
+function toggleDensities(){
+	$("#sectors").toggleClass("densities")
 }
 function getMinerals(x, y){
     var systemObj = galaxyData[system];
-	var val = "";
+	var hotspots = "";
+	var rates = {}
+	var remainder = 1;
 	for(var spawn of systemObj.mineralSpawns){
 		var mineral = miningData[spawn.name.split(" ").join("_")];
 		var distance = round(distanceTo(x,y,spawn.location.x,spawn.location.y));
 		var density = lerp(mineral.density, 0, distance / mineral.spawnRange);
 		if(density){
-			val += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
+			hotspots += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
+			if(!(spawn.name in rates)){
+				rates[spawn.name] = 0;
+			}
+			var add = remainder * density;
+			remainder -= add;
+			rates[spawn.name] += add;
 		}
+	
 	}
-	return val;
+	rates["Nickel"] = remainder;
+	
+	var mineralRates = Object.entries(rates).sort(function(a,b){return b[1]-a[1]});
+	var ratesHTML = "";
+
+	var gradiant = document.createElementNS("http://www.w3.org/2000/svg","radialGradient");
+	gradiant.setAttribute("cx",0);
+	gradiant.setAttribute("cy",0);
+	gradiant.setAttribute("r",8);
+	gradiant.setAttribute("gradientUnits","userSpaceOnUse");
+	position = 0;
+	
+	for(mineral of mineralRates){
+		if(mineral[0] != "Nickel"){
+			addColorStops(gradiant,mineral[0],position,position+=mineral[1]*100);
+		}
+		ratesHTML += "<p>"+mineral[0]+":"+Math.round(mineral[1]*100)/100+"</p>";
+	}
+	addColorStops(gradiant,"Nickel",position,100);
+	
+	return [ratesHTML, hotspots, gradiant];
 }
+function addColorStops(gradiant,mineralName,start,finish){
+	var mineralObj = miningData[mineralName.split(" ").join("_")];
+	var oreStart = document.createElementNS("http://www.w3.org/2000/svg","stop");
+	oreStart.setAttribute("offset",start+"%");
+	oreStart.setAttribute("stop-color",getRGB(mineralObj.color));
+	var oreEnd = document.createElementNS("http://www.w3.org/2000/svg","stop");
+	oreEnd.setAttribute("offset",finish+"%");
+	oreEnd.setAttribute("stop-color",getRGB(mineralObj.secondaryColour));
+	gradiant.appendChild(oreStart);
+	gradiant.appendChild(oreEnd);
+}
+
 function round(val){
 	var fraction = val % 1;
 	var floor = val - fraction;

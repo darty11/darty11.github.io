@@ -185,7 +185,13 @@ function calcExtension(wep, name){
             }
             break;
         case "range":
-            val = wep.maxSpeed*wep.life;
+			var ttts = calcExtension(wep,"#ttts");
+            if(ttts > wep.life){
+                val = wep.life * wep.life * wep.acceleration/2 + wep.armingTime * wep.initSpeed;
+            }
+            else{
+                val = ttts * ttts * wep.acceleration/2 + ttts * wep.initSpeed + wep.maxSpeed*(wep.life-ttts);
+            }
             break;
         case "dpm":
             if(wep.energyBased)

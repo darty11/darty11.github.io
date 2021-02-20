@@ -11,18 +11,21 @@
 </head>
     <body>
 		<nav></nav>
-		<header><h1 id=sector_name></h1><div><button onClick="toggleSpawns();">Toggle Spawn Centers</button></div></header>
+		<header><h1 id=sector_name></h1><div><button onClick="toggleSpawns();">Toggle Spawn Centers</button></div><div><button onClick="toggleDensities();">Toggle Mineral Densities</button></div></header>
 		<div class = "sector-container">
 			<svg id = "sectors" >
+				<defs id = "gradiantsDef"></defs>
 				<defs>
 					<circle id = "spawn_point" class="spawn" cx="0" cy="0" r="2" />
-					<polygon id = "sector_outline" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill-opacity="0"></polygon>
+					<circle id = "spawn_outline" class="spawn_outline" cx="0" cy="0" r="4" fill=black stroke=none />
+					<polygon id = "sector_outline" points="0 9.75,8.444 4.875 ,8.444 -4.875, 0 -9.75, -8.444 -4.875,-8.444 4.875 " class = "sectorBox" fill-opacity="0" stroke-width="0.5"></polygon>
+					<polygon id = "sector_outline2" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill-opacity="0" stroke-width="0.25"></polygon>
 					<radialGradient id ="Nebula-Gradiant" fx = 50% fy = 50%>
 						<stop stop-color = "lightGrey" offset = "10%" stop-opacity = "0"/>
 						<stop stop-color = "lightGrey" offset = "100%" stop-opacity = "0.75"/>
 					</radialGradient>
-					<polygon id = "nebula-fill" points="0 10,8.6603 5 ,8.6603 -5, 0 -10, -8.6603 -5,-8.6603 5 " class = "sectorBox" fill="url(#Nebula-Gradiant)"></polygon>
-					
+					<polygon id = "nebula-fill" points="0 9.75,8.444 4.875 ,8.444 -4.875, 0 -9.75, -8.444 -4.875,-8.444 4.875 " class = "sectorBox" fill="url(#Nebula-Gradiant)" stroke-width="0.5"></polygon>
+					<polygon id = "mineralComposition" points="0 9.75,8.444 4.875 ,8.444 -4.875, 0 -9.75, -8.444 -4.875,-8.444 4.875 " stroke= none></polygon>
 					<path id = "arm" d="M 1.5 1 Q 3.5 2 5.5 -1 Q 3.5 3.5 0 2" stroke-width="0.5" /> 
 					<path id = "arm2" d="M -1.75 1.75 A 2 2, 0,0,1, 2 -5 A 3.5 3.5 , 0,0,0, -1.75 -1.75" stroke=none /> 
 					<path id = "arm3" d="M 1 0 C 1 -5, -5.5 -5 -5.5 2 C -8 -5, 2 -7.5 2 0" stroke=none /> 
@@ -381,9 +384,20 @@
 
 					</g>
 				</defs>
+				<g id=backlines></g>
 			</svg>
 		</div >
-		<div class="tooltip"></div>
+		<div class="tooltip">
+			<h1>Sector</h1>
+			<div class="tooltip-info">
+				<div class="rates">
+					<h3>Rates</h3>
+				</div>
+				<div class="hotspots">
+					<h3>Hotspots</h3>
+				</div>
+			</div>
+		</div>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <script src="smallConstants.min.js"></script>
         <script src="common.js"></script>
