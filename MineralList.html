@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: MineralList.html
+   -->
+   <meta charset="utf-8" />
+   <title>Minerals</title>
+   <link rel="stylesheet" href="style_m.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+	
+		<nav></nav>
+        <table id = "main" class = "table">
+            <thead>
+                <tr>
+                    <th data-key="#icon"></th>
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="price">Price</th>
+                    <th class=sorter data-key="scarcity">Scarcity</th>
+                    <th class=sorter data-key="%yield">Average Yield</th>
+                    <th class=sorter data-key="%maxyield">Max Yield</th>
+                    <th class=sorter data-key="%sectorYield"><abbr title="The average profit from mining 1 asteroid sector adjacent to 1 hotspot.">Approximate Sector Yield</abbr></th>
+                    <th class=sorter data-key="%sectorHaul"><abbr title="The average mineral content from mining 1 asteroid sector adjacent to 1 hotspot.">Approximate Sector Haul</abbr></th>
+
+					<th class=sorter data-key="density">Density</th>
+                    <th class=sorter data-key="level">level</th>
+                    <th class=sorter data-key="spawnRange">HotspotRange</th>
+                    <th data-key="description" data-scroll="1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupMinerals.js"></script>
+        
+    </body>
+
+</html>

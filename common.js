@@ -18,6 +18,9 @@ function repeatString(string,times){
 function getSmallShipIcon(name){
     return 'http://www.starfighterinfinity.com/sf/sfinew/icons/Ships/'+encodeURIComponent(name)+'.png';
 }
+function getLargeIcon(id){
+	return 'https://www.benoldinggames.co.uk/sfi/gamedata/icons/allitems/'+encodeURIComponent(id)+".png";
+}
 function getSmallItemIcon(name){
     return 'http://www.starfighterinfinity.com/sf/sfinew/icons/Items/'+encodeURIComponent(name)+'.png';
 }
@@ -187,7 +190,7 @@ function calcExtension(wep, name){
         case "range":
 			var ttts = calcExtension(wep,"#ttts");
             if(ttts > wep.life){
-                val = wep.life * wep.life * wep.acceleration/2 + wep.armingTime * wep.initSpeed;
+                val = wep.life * wep.life * wep.acceleration/2 + wep.life * wep.initSpeed;
             }
             else{
                 val = ttts * ttts * wep.acceleration/2 + ttts * wep.initSpeed + wep.maxSpeed*(wep.life-ttts);
@@ -227,7 +230,14 @@ function calcExtension(wep, name){
             val = 1/wep.fireRate;
             break;
         case "ttts":
-            val = (wep.maxSpeed-wep.initSpeed)/wep.acceleration;
+            val = Math.abs((wep.maxSpeed-wep.initSpeed)/wep.acceleration);
+			if(wep.maxSpeed == wep.initSpeed){
+				val = 0;
+			}
+			else if(wep.acceleration == 0){
+				val = Infinity;
+			}
+			
             break;
         case "epm":
             if(wep.energyBased)
@@ -899,6 +909,45 @@ function getShipStat(ship, loadout, weaponData, stat){
 			break;
     }
     return Math.round(1000*val)/1000;
+}
+function distanceToSector(x,y,x2,y2){
+	if(y % 2 == 1){
+		x += 0.5;
+	}
+	if(y2 % 2 == 1){
+		x2 += 0.5;
+	}
+	var x3 = x-x2;
+	var y3 = y-y2;
+	return Math.sqrt(x3*x3 + y3*y3);
+}
+function benRound(val){
+	var fraction = val % 1;
+	var floor = val - fraction;
+	if(fraction == 0.5){
+		if(floor % 2 ){
+			return floor+1;
+		}
+	}
+	else if(fraction> 0.5){
+		return floor+1;
+	}
+	return floor;
+}
+function lerp(start, end, progress){
+	if(progress < 0){
+		progress = 0;
+	}
+	else if(progress > 1){
+		progress = 1;
+	}
+	return start + (end - start) * progress;
+}
+function getMaxYield(scarcity){
+	return Math.max(50,(500*scarcity))  *  5;
+}
+function getAverageYield(scarcity){
+	return Math.max(50,(50+500*scarcity)/2)  *  (0.95+0.05*(1+(1+5)/2)/2);
 }
 function degToRad(deg){
     return (deg/180)*Math.PI

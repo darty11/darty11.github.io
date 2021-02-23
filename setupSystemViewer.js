@@ -5,6 +5,9 @@ var idToName = {};
 var system = "Delta_Trianguli";
 
 function setupSystem(){
+	for(var gal in galaxyData){
+		idToName[galaxyData[gal].id-1] = gal;
+	}
     var systemObj = galaxyData[system];
 	for(var spawn of systemObj.mineralSpawns){
 		systemObj.sectors[spawn.location.y].columns[spawn.location.x].spawner = spawn;
@@ -56,10 +59,12 @@ function createSector(sectorObject, x, y){
 	backline.setAttribute("href","#sector_outline2");
 	backline.setAttribute("transform",translate);
 	document.getElementById("backlines").appendChild(backline);
+	var extraAsteroids = false;
 	if(getSectorType(sectorObject.type) != "Empty"){
 		if(getSectorType(sectorObject.type) == "Asteroids"){
 			node.classList.add("Asteroids");
 			backline.classList.add("Asteroids");
+			extraAsteroids = true;
 		}
 		var ast = document.createElementNS("http://www.w3.org/2000/svg","use");
 		var subType = sectorObject.subType;
@@ -132,9 +137,13 @@ function createSector(sectorObject, x, y){
 			node.appendChild(ast);
 		}
 	}
-
+	var num = (3+10)/2;
+	if(extraAsteroids){
+		num = (25+45)/2;
+	}
 	node.classList.add("sector");
-	var [rates, hotspots, gradiant] = getMinerals(x,y);
+	var [rates, hotspots, gradiant] = getMinerals(x,y,num);
+	
 	var html = "";
 	html += "<h1>"+sectorObject.name+"</h1>";
 	html += '<div class="tooltip-info">';
@@ -155,7 +164,8 @@ function createSector(sectorObject, x, y){
 	minerals.setAttribute("href","#mineralComposition");
 	minerals.setAttribute("fill","url(#"+gradId+")");
 	minerals.setAttribute("class","mineral-density");
-	node.appendChild(minerals)
+	node.appendChild(minerals);
+	
 	
 	if(sectorObject.spawner){
 		var spawnOutline = document.createElementNS("http://www.w3.org/2000/svg","use");
@@ -177,7 +187,6 @@ function createSector(sectorObject, x, y){
 		node.appendChild(spawn);
 	}
 	
-	
 	node.appendChild(outline);
 	
 	
@@ -192,17 +201,18 @@ function toggleSpawns(){
 function toggleDensities(){
 	$("#sectors").toggleClass("densities")
 }
-function getMinerals(x, y){
+function getMinerals(x, y, asteroids){
     var systemObj = galaxyData[system];
 	var hotspots = "";
 	var rates = {}
 	var remainder = 1;
+	var value = 0;
+	var space = 0;
 	for(var spawn of systemObj.mineralSpawns){
 		var mineral = miningData[spawn.name.split(" ").join("_")];
-		var distance = round(distanceTo(x,y,spawn.location.x,spawn.location.y));
+		var distance = benRound(distanceToSector(x,y,spawn.location.x,spawn.location.y));
 		var density = lerp(mineral.density, 0, distance / mineral.spawnRange);
 		if(density){
-			hotspots += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
 			if(!(spawn.name in rates)){
 				rates[spawn.name] = 0;
 			}
@@ -212,7 +222,7 @@ function getMinerals(x, y){
 		}
 	
 	}
-	rates["Nickel"] = remainder;
+	rates["Nickel"] = (rates["Nickel"] || 0) + remainder;
 	
 	var mineralRates = Object.entries(rates).sort(function(a,b){return b[1]-a[1]});
 	var ratesHTML = "";
@@ -228,10 +238,17 @@ function getMinerals(x, y){
 		if(mineral[0] != "Nickel"){
 			addColorStops(gradiant,mineral[0],position,position+=mineral[1]*100);
 		}
-		ratesHTML += "<p>"+mineral[0]+":"+Math.round(mineral[1]*100)/100+"</p>";
+		hotspots += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
+		var mineralObj = miningData[mineral[0].split(" ").join("_")];
+		//           % with mineral      
+		var minSpace =  mineral[1]  *  asteroids  *  getAverageYield(mineralObj.scarcity);
+		var minValue = minSpace * mineralObj.price;
+		value += minValue;
+		space += minSpace;
+		ratesHTML += "<p>"+mineral[0]+":"+Math.round(mineral[1]*100)/100+" ("+Math.round(minValue)+","+Math.round(minSpace)+")</p>";
 	}
 	addColorStops(gradiant,"Nickel",position,100);
-	
+	ratesHTML += "<p>Total:100 ("+Math.round(value)+","+Math.round(space)+")</p>";
 	return [ratesHTML, hotspots, gradiant];
 }
 function addColorStops(gradiant,mineralName,start,finish){
@@ -246,39 +263,8 @@ function addColorStops(gradiant,mineralName,start,finish){
 	gradiant.appendChild(oreEnd);
 }
 
-function round(val){
-	var fraction = val % 1;
-	var floor = val - fraction;
-	if(fraction == 0.5){
-		if(floor % 2 ){
-			return floor+1;
-		}
-	}
-	else if(fraction> 0.5){
-		return floor+1;
-	}
-	return floor;
-}
-function lerp(start, end, progress){
-	if(progress < 0){
-		progress = 0;
-	}
-	else if(progress > 1){
-		progress = 1;
-	}
-	return start + (end - start) * progress;
-}
-function distanceTo(x,y,x2,y2){
-	if(y % 2 == 1){
-		x += 0.5;
-	}
-	if(y2 % 2 == 1){
-		x2 += 0.5;
-	}
-	var x3 = x-x2;
-	var y3 = y-y2;
-	return Math.sqrt(x3*x3 + y3*y3);
-}
+
+
 
 function angleTo(x,y,x2,y2){
 	if(y % 2 == 1){
@@ -310,12 +296,15 @@ function showTooltip(){
 
 getJsonP("systems");
 getJsonP("minerals");
+getJsonP("gates");
 
 $(document).ready(function(){
 	
 	
 	galaxyData = constants.systems;
     miningData = constants.minerals;
+	
+    warpData = constants.gates;
 	if(getQuerys().system){
 		system = getQuerys().system;
 	}
