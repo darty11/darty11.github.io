@@ -31,7 +31,11 @@ function restoreConfigToDefault(){
     config = $.extend(true,{},default_config);
 }
 restoreConfigToDefault();
-var weaponData = {}
+var weaponData = {};
+var weaponRanges = {};
+var weaponVariants = [];
+var craftables = {};
+
 //creates a list of "extensions" which are table headers whose key data starts with a % or #.
 function compileExtensions(table){
     var headers = $("#"+table+" thead tr th");
@@ -393,6 +397,9 @@ function editSelected(){
 	win.focus();
 }
 getJsonP("weapons");
+getJsonP("ranges");
+getJsonP("craftable");
+getJsonP("variant_ranges");
 
 //Once the dom has loaded, load the weapondata info via json-p.
 $(document).ready(function(){
@@ -415,8 +422,16 @@ $(document).ready(function(){
     synchronizeConfig();
     synchronizeTables();
     
-    weaponData = constants.weapons;
-
+    weaponData = constants.weapons
+	weaponRanges = constants.ranges;
+    weaponVariants = constants.variant_ranges;
+	craftables = constants.craftable;
+	//found in common.js
+	linkRangesAndSubWeapons(weaponRanges,weaponVariants,weaponData);
+	//found in common.js
+	linkCraftables(craftables,weaponData);
+	//found in common.js
+	fixEngines(weaponRanges,weaponData);
     repopulateTable(weaponData);
     
     $(document).on("input","#need_buyable",updateBuyable);

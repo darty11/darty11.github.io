@@ -65,7 +65,7 @@ function initializeShipbuilder(){
     addSlot($("#secondary_container"),"SECONDARY_WEAPON_MINE",ship.mineSecondary);
     addSlot($("#secondary_container"),"SECONDARY_WEAPON_PROXIMITY",ship.proximitySecondary);
     addSlot($("#secondary_container"),"SECONDARY_WEAPON_LARGE",ship.largeSecondary);
-    $("head").append($('<link rel="icon" type="image/png" href="'+getSmallShipIcon(currentShip)+'">'));
+    $("head").append($('<link rel="icon" type="image/png" href="'+getLargeIcon(currentShip)+'">'));
     updateShiploadout();
     updateLeftPanel();
 }
@@ -399,9 +399,11 @@ function generateBenString(){
 	//benString = benString.replace(/null,/g,"");
 	//benString = benString.replace(/,null/g,"");
 	benString = benString.replace(/null/g," ");
-	window.alert(benString + "\n\n"+genLocationAndQuerys({
+	var urlString = genLocationAndQuerys({
 		"importString":benString
-	}));
+	});
+	var messageString = '<div class=dialog title="Ship Code"><p>' + benString + '</p><a href="'+urlString+'">'+urlString+"</a></div>"
+	 $(messageString).dialog();
 }
 
 function loadBenString(benString){

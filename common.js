@@ -15,20 +15,14 @@ function repeatString(string,times){
     return val;
 }
 //simple helper methods to create urls pointing to ship and weapon icons on the official site.
-function getSmallShipIcon(name){
-    return 'http://www.starfighterinfinity.com/sf/sfinew/icons/Ships/'+encodeURIComponent(name)+'.png';
-}
 function getLargeIcon(id){
 	return 'https://www.benoldinggames.co.uk/sfi/gamedata/icons/allitems/'+encodeURIComponent(id)+".png";
 }
 function getSmallItemIcon(name){
-    return 'http://www.starfighterinfinity.com/sf/sfinew/icons/Items/'+encodeURIComponent(name)+'.png';
-}
-function getLargeItemIcon(name,type){
-    return 'https://www.benoldinggames.co.uk/sfi/gamedata/icons/'+encodeURIComponent(type)+"/"+encodeURIComponent(name)+'.png';
+    return getLargeIcon(name);
 }
 function getBigShipIcon(name){
-    return 'http://www.starfighterinfinity.com/sf/sfinew/icons/shipsBig/'+encodeURIComponent(name)+'.png';
+    return getLargeIcon(name);
 }
 //helper function used to get extra positional data about a jquery element
 function expandedPosition(jElement){

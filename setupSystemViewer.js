@@ -204,7 +204,7 @@ function toggleDensities(){
 function getMinerals(x, y, asteroids){
     var systemObj = galaxyData[system];
 	var hotspots = "";
-	var rates = {}
+	var rates = {};
 	var remainder = 1;
 	var value = 0;
 	var space = 0;
@@ -219,8 +219,9 @@ function getMinerals(x, y, asteroids){
 			var add = remainder * density;
 			remainder -= add;
 			rates[spawn.name] += add;
+			
+			hotspots += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
 		}
-	
 	}
 	rates["Nickel"] = (rates["Nickel"] || 0) + remainder;
 	
@@ -238,7 +239,6 @@ function getMinerals(x, y, asteroids){
 		if(mineral[0] != "Nickel"){
 			addColorStops(gradiant,mineral[0],position,position+=mineral[1]*100);
 		}
-		hotspots += "<p>"+spawn.name+":"+Math.round(density*100)/100+"</p>";
 		var mineralObj = miningData[mineral[0].split(" ").join("_")];
 		//           % with mineral      
 		var minSpace =  mineral[1]  *  asteroids  *  getAverageYield(mineralObj.scarcity);

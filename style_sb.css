@@ -316,3 +316,25 @@ body {
 .locked {
   color:#cc8888
 }
+
+.ui-dialog {
+  border: 1px solid #003d5a;
+  background: black;
+  max-height: 125px;
+  padding: 5px;
+  font-size: 10px;
+  position:absolute;
+}
+.ui-dialog a,.ui-dialog a:hover {
+  padding: 0px;
+  background: none;
+  border: none;
+  color: #9FF;
+  text-decoration: underline;
+  font-size: inherit;
+  
+}
+.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
+    position: absolute;
+    right: 5px;
+}
