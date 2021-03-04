@@ -277,9 +277,7 @@ $(document).ready(function(){
 	catch(e){
 		window.alert("Invalid Query:"+e);
 	}
-	var extensions = compileExtensions(currentTable);
-	extendData(extensions,weaponData);
-	repopulateTable(weapons);
+
 	
     var query = getQuerys();
     if(!$.isEmptyObject(query)){
@@ -294,7 +292,9 @@ $(document).ready(function(){
     }
     synchronizeConfig();
     synchronizeTables();
-    
+	var extensions = compileExtensions(currentTable);
+	extendData(extensions,weaponData);
+	repopulateTable(weapons);
     $(document).on("click",".sorter",doSort);
 	
     $(document).on("change","input",changeStat); //use change instead of input because the input being edited gets recreated with this method.
