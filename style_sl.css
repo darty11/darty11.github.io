@@ -6,7 +6,12 @@
    padding:1px;
      
 }
-
+.lessMineral{
+  color:orange;
+}
+.moreMineral{
+  color:lime;
+}
 #main tr:hover td{
    
   border: 1px solid #008cc4;

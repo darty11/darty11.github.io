@@ -1,6 +1,6 @@
 //Setting up global variables 
 var default_config = {
-    "max_level":150,
+    "max_level":1000,
     "sort":["requiredLevel"],
     "sort_high_to_low":[false],
 }
@@ -12,14 +12,14 @@ function restoreConfigToDefault(){
 restoreConfigToDefault();
 var galaxyData = {};
 var miningData = {};
-
+var mineralNames = [];
 function checkData(){
 	
 	var query = getQuerys();
 	var headerRow = $("#main thead tr");
 	for(var mineralName in miningData){
 		var mineral = miningData[mineralName];
-		if(mineral.level == 0){
+		if(mineral.level == 0 && !mineral.isRare){
 			var header = $('<th class = "sorter" data-key="#'+mineral.name.split(" ").join("_")+'"></th>');
 			header.html(mineral.name);
 			headerRow.append(header);
@@ -81,7 +81,6 @@ function repopulateTable(data){
 function createTableData(system, header){
     var key = $(header).data("key")
     var value = "";
-    
 	if(key.startsWith("%")){
 		switch(key){
 			case "%averageDark":
@@ -92,6 +91,12 @@ function createTableData(system, header){
 		var mineral = key.substring(1,key.length);
 		
 		value = system.spawnCounts[mineral];
+		if(miningData[mineral].baseID == system.lessMineral){
+			value = '<span class="lessMineral">'+value+'</span>';
+		}
+		if(miningData[mineral].baseID == system.moreMineral){
+			value = '<span class="moreMineral">'+value+'</span>';
+		}
 	
 	}
 	else{
@@ -170,8 +175,8 @@ function compareViaConfig(ship1, ship2, index){
 }
 //manages user input for the level field
 function updateLevel(){
-    if($(this).val()>150){
-        $(this).val(150);
+    if($(this).val()>1000){
+        $(this).val(1000);
     }
     else if($(this).val()<0){
         $(this).val(0);
@@ -269,6 +274,11 @@ $(document).ready(function(){
 	
 	galaxyData = constants.systems;
     miningData = constants.minerals;
+	for(var mineralName in miningData){
+		if(miningData[mineralName].level == 0 && miningData[mineralName].baseID >=0){
+			mineralNames[miningData[mineralName].baseID] = mineralName;
+		}
+	}
 	checkData();
     config.max_level = $("#max_level").val();
     synchronizeConfig();
