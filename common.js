@@ -928,6 +928,42 @@ function benRound(val){
 	}
 	return floor;
 }
+function benRoundMeaningful(num){
+	var num2 = 1;
+	if (num > 100000000)
+	{
+		num2 = 500000;
+	}
+	else if (num > 1000000)
+	{
+		num2 = 50000;
+	}
+	else if (num > 10000)
+	{
+		num2 = 1000;
+	}
+	else if (num > 1000)
+	{
+		num2 = 100;
+	}
+	else if (num > 500)
+	{
+		num2 = 100;
+	}
+	else if (num > 100)
+	{
+		num2 = 50;
+	}
+	else if (num > 50)
+	{
+		num2 = 10;
+	}
+	else if (num > 10)
+	{
+		num2 = 5;
+	}
+	return benRound(num / num2) * num2;
+}
 function lerp(start, end, progress){
 	if(progress < 0){
 		progress = 0;
@@ -1073,6 +1109,7 @@ function setupNav(){
 		nav.append(div);
 	}
 }
+
 $(document).ready(function(){
 	setupNav();
 });

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!--
+      Filename: RaceList.html
+   -->
+   <meta charset="utf-8" />
+   <title>Races</title>
+   <link rel="stylesheet" href="style_r.css" />
+   <link rel="stylesheet" href="style_c.css" />
+</head>
+    <body>
+	
+		<nav></nav>
+        <table id = "main" class = "table">
+            <thead>
+                <tr>
+                    <!--<th data-key="#icon"></th>-->
+                    <th class=sorter data-key="name">Name</th>
+                    <th class=sorter data-key="%allowInChaosEngine">Chaos Engine</th>
+                    <th class=sorter data-key="%race">Race</th>
+                    <th class=sorter data-key="%mineral">Spawn Mineral</th>
+                    <th class=sorter data-key="%mineralCost">Spawn Mineral Cost</th>
+                    <th class=sorter data-key="%cost">Spawn Credit Cost</th>
+                    <th data-key="%raceInfo" data-scroll="1">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="smallConstants.min.js"></script>
+        <script src="common.js"></script>
+        <script src="setupRaces.js"></script>
+        
+    </body>
+
+</html>
