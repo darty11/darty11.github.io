@@ -2,7 +2,18 @@ var galaxyData = {};
 var warpData = {};
 var idToName = [];
 
-
+function curveX(xPos){
+	return curveLimit((xPos-2)/8)*8;
+}
+function curveLimit(x){
+	if(x>1){
+		return 2-1/x;
+	}
+	if(x<-1){
+		return -2-1/x;
+	}
+	return x;
+}
 function setupGalaxy(){
    
 	for(warpName in warpData){
@@ -13,8 +24,8 @@ function setupGalaxy(){
 			var system2 = galaxyData[idToName[warpObject.toLocation.starSystemID]];
 			if(system1.name != system2.name){
 				var line = document.createElementNS("http://www.w3.org/2000/svg","line");
-				line.setAttribute("x1",system1.position.x);
-				line.setAttribute("x2",system2.position.x);
+				line.setAttribute("x1",curveX(system1.position.x));
+				line.setAttribute("x2",curveX(system2.position.x));
 				line.setAttribute("y1",-system1.position.z);
 				line.setAttribute("y2",-system2.position.z);
 				var color = "org-Worm";
@@ -50,8 +61,8 @@ function setupGalaxy(){
 		var system = galaxyData[systemName];
 		if(system.whiteHole){
 			var line = document.createElementNS("http://www.w3.org/2000/svg","line");
-				line.setAttribute("x1",system.position.x);
-				line.setAttribute("x2",galaxyData.Sheenland.position.x);
+				line.setAttribute("x1",curveX(system.position.x));
+				line.setAttribute("x2",curveX(galaxyData.Sheenland.position.x));
 				line.setAttribute("y1",-system.position.z);
 				line.setAttribute("y2",-galaxyData.Sheenland.position.z);
 				var color = "org-White";
@@ -66,7 +77,7 @@ function setupGalaxy(){
 				$("#systems")[0].insertBefore(line,$("#systems")[0].childNodes[0]);  
 		}
 		var systemGroup = document.createElementNS("http://www.w3.org/2000/svg","g");
-		var translate = "translate("+system.position.x +" "+-system.position.z+")";
+		var translate = "translate("+curveX(system.position.x) +" "+-system.position.z+")";
 
 		var outline = document.createElementNS("http://www.w3.org/2000/svg","use");
 		outline.setAttribute("href","#Outline");

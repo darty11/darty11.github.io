@@ -558,10 +558,10 @@ function getShipStat(ship, loadout, weaponData, stat){
             val = ship.turning * engine.turningMod;
             break;
         case "boostSpeed":
-            val = getShipStat(ship, loadout, weaponData, "cruiseSpeed") * engine.propulsionEnhance;
+            val = ship.maxSpeed * 1.25 * calcExtension(engine,"#topBoost");
             break;
         case "boostAverageSpeed":
-            val = getShipStat(ship, loadout, weaponData, "cruiseSpeed") * (1 + engine.propulsionEnhance) / 2;
+            val = ship.maxSpeed * 1.25 * calcExtension(engine,"#averageBoost");
             break;
         case "boostTimeSpeed":
             val = engine.propulsionEnhanceTime;
